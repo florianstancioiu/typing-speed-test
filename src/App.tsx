@@ -1,9 +1,22 @@
-function App() {
+import Header from "./components/UI/Header/Header";
+import SeparatedList from "./components/SeparatedList/SeparatedList";
+import Dropdown from "./components/UI/Dropdown/Dropdown";
+import TypingTest from "./components/TypingTest/TypingTest";
+
+const App = () => {
   return (
     <>
-      <h1 className="text-3xl font-bold underline">Hello world!</h1>
+      <Header />
+      <div>
+        <SeparatedList />
+        <div>
+          <Dropdown />
+          <Dropdown />
+        </div>
+        <TypingTest />
+      </div>
     </>
   );
-}
+};
 
 export default App;
