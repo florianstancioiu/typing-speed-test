@@ -6,7 +6,7 @@ export type TextZoneProps = {
   isStarted: boolean;
 };
 
-const TextZone = ({ text, typedText, isStarted }: TextZoneProps) => {
+const TextZone = ({ text, isStarted }: TextZoneProps) => {
   return (
     <main className="px-4 border-b border-neutral-700 pb-4 mb-8">
       {!isStarted && (
