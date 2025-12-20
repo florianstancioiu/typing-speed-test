@@ -94,4 +94,5 @@ Use this section to outline areas that you want to continue focusing on in futur
 
 ## Daily summaries
 
-- **December 19th, 2025:** I used Vite to create the initial project files, I installed TailwindCSS and vite-plugin-svgr, I created some base components for the "home" page, I enabled github actions.
+- **December 19th, 2025:** - **time spent: _3 hours_** - I used Vite to create the initial project files, I installed TailwindCSS and vite-plugin-svgr, I created some base components for the "home" page, I enabled github actions.
+- **December 20th, 2025:** - **time spent: _2.5 hours_** - I worked on the "Home - Not started" mobile page
