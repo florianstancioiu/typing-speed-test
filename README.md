@@ -6,6 +6,7 @@ This is a solution to the [Typing Speed Test challenge on Frontend Mentor](https
 
 - [Overview](#overview)
   - [The challenge](#the-challenge)
+  - [Additional (optional) challenges](#additional-optional-challenges)
   - [Screenshot](#screenshot)
   - [Links](#links)
 - [My process](#my-process)
@@ -22,19 +23,46 @@ This is a solution to the [Typing Speed Test challenge on Frontend Mentor](https
 
 Users should be able to:
 
-- View the optimal layout for the interface depending on their device's screen size
-- See hover and focus states for all interactive elements on the page
+#### Test Controls
+
+- Start a test by clicking the start button or by clicking the passage and typing
+- Select a difficulty level (Easy, Medium, Hard) for passages of varying complexity
+- Switch between "Timed (60s)" mode and "Passage" mode (timer counts up, no limit)
+- Restart at any time to get a new random passage from the selected difficulty
+
+#### Typing Experience
+
+- See real-time WPM, accuracy, and time stats while typing
+- See visual feedback showing correct characters (green), errors (red/underlined), and cursor position
+- Correct mistakes with backspace (original errors still count against accuracy)
+
+#### Results & Progress
+
+- View results showing WPM, accuracy, and characters (correct/incorrect) after completing a test
+- See a "Baseline Established!" message on their first test, setting their personal best
+- See a "High Score Smashed!" celebration with confetti when beating their personal best
+- Have their personal best persist across sessions via localStorage
+
+#### UI & Responsiveness
+
+- View the optimal layout depending on their device's screen size
+- See hover and focus states for all interactive elements
+
+### Additional (optional) challenges
+
+1.  Add multiple test durations (15s, 30s, 60s, 120s)
+2.  Add different text categories to type, such as famous quotes, song lyrics, or code snippets
+3.  Track WPM and accuracy over time using local storage
+4.  Add a keyboard heatmap showing errors and keypress frequency
+5.  Create shareable result cards for social media
 
 ### Screenshot
 
-![](./screenshot.jpg)
-
-Add a screenshot of your solution. The easiest way to do this is to use Firefox to view your project, right-click the page and select "Take a Screenshot". You can choose either a full-height screenshot or a cropped one based on how long the page is. If it's very long, it might be best to crop it.
+![](./mobile-screenshot.png)
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+- Live Site URL: [https://florianstancioiu.github.io/typing-speed-test/](https://florianstancioiu.github.io/typing-speed-test/)
 
 ## My process
 
@@ -94,5 +122,9 @@ Use this section to outline areas that you want to continue focusing on in futur
 
 ## Daily summaries
 
-- **December 19th, 2025:** - **time spent: _3 hours_** - I used Vite to create the initial project files, I installed TailwindCSS and vite-plugin-svgr, I created some base components for the "home" page, I enabled github actions.
-- **December 20th, 2025:** - **time spent: _2.5 hours_** - I worked on the "Home - Not started" mobile page
+| Date                | Time Spent | Summary                                                                                                                                                                      |
+| ------------------- | ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| December 19th, 2025 | 3 hours    | I used Vite to create the initial project files, I installed TailwindCSS and vite-plugin-svgr, I created some base components for the "home" page, I enabled github actions. |
+| December 20th, 2025 | 3 hours    | I worked on the "Home - Not started" mobile page                                                                                                                             |
+
+_Total time spent working on the project:_ **6 hours**
