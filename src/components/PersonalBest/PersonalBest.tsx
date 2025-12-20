@@ -6,11 +6,12 @@ export type PersonalBestProps = {
 
 const PersonalBest = ({ wpm }: PersonalBestProps) => {
   return (
-    <div>
-      <div>
-        <PersonalBestSvg />
-      </div>
-      <span>{wpm} WPM</span>
+    <div className="flex justify-between items-center gap-x-2.5">
+      <PersonalBestSvg />
+      <p>
+        <span className="hidden">Personal </span>Best:{" "}
+        <span className="text-white">{wpm} WPM</span>
+      </p>
     </div>
   );
 };
