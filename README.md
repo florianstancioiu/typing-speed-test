@@ -6,7 +6,7 @@ This is a solution to the [Typing Speed Test challenge on Frontend Mentor](https
 
 - [Overview](#overview)
   - [The challenge](#the-challenge)
-  - [Additional (optional) challenges](#additional-optional-challenges)
+  - [Optional challenges](#optional-challenges)
   - [Screenshot](#screenshot)
   - [Links](#links)
 - [My process](#my-process)
@@ -48,7 +48,7 @@ Users should be able to:
 - View the optimal layout depending on their device's screen size
 - See hover and focus states for all interactive elements
 
-### Additional (optional) challenges
+### Optional challenges
 
 1.  Add multiple test durations (15s, 30s, 60s, 120s)
 2.  Add different text categories to type, such as famous quotes, song lyrics, or code snippets
