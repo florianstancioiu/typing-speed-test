@@ -10,15 +10,16 @@ export type SeparatedListProps = {
 
 const SeparatedList = ({ options }: SeparatedListProps) => {
   return (
-    <ul className="list-none grid grid-cols-3 mb-4">
+    <ul className="list-none grid grid-cols-3 mb-4 md:inline-flex md:mb-4">
       {options.map((option, index) => {
         const isLastOption = index === options.length - 1;
-        let listClasses = "text-center ";
+        let listClasses =
+          "text-center md:pr-6 md:mr-6 md:flex md:items-center ";
         listClasses += isLastOption ? "" : " border-r border-neutral-700 ";
 
         return (
           <li key={option.id} className={listClasses}>
-            <p className="mb-2">{option.title}</p>
+            <p className="mb-2 md:mb-0 md:mr-2.5 md:text-xl">{option.title}</p>
             <p className="text-white text-2xl font-bold">{option.value}</p>
           </li>
         );

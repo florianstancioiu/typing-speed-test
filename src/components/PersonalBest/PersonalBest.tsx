@@ -9,7 +9,7 @@ const PersonalBest = ({ wpm }: PersonalBestProps) => {
     <div className="flex justify-between items-center gap-x-2.5">
       <PersonalBestSvg />
       <p>
-        <span className="hidden">Personal </span>Best:{" "}
+        <span className="hidden md:inline">Personal </span>Best:{" "}
         <span className="text-white">{wpm} WPM</span>
       </p>
     </div>

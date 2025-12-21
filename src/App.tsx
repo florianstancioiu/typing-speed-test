@@ -82,8 +82,8 @@ const App = () => {
   return (
     <>
       <Header />
-      <div>
-        <div className="px-4 mb-8">
+      <div className="md:pb-16">
+        <div className="px-4 mb-8 md:px-8">
           <div className="border-b border-neutral-700 pb-4">
             <SeparatedList options={listOptions} />
             <div className="flex justify-between gap-x-2.5">
