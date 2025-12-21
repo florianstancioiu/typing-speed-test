@@ -1,3 +1,6 @@
+import { useState } from "react";
+
+import { type DropdownOption } from "./components/UI/DropdownToButtons/DropdownToButtons";
 import Header from "./components/UI/Header/Header";
 import SeparatedList from "./components/SeparatedList/SeparatedList";
 import DropdownToButtons from "./components/UI/DropdownToButtons/DropdownToButtons";
@@ -12,7 +15,7 @@ const App = () => {
     { id: 3, title: "Time:", value: "0:60" },
   ];
 
-  const difficultyOptions = [
+  const [difficultyOptions, setDifficultyOptions] = useState([
     {
       id: 1,
       title: "Easy",
@@ -31,9 +34,9 @@ const App = () => {
       value: "hard",
       isActive: true,
     },
-  ];
+  ]);
 
-  const modeOptions = [
+  const [modeOptions, setModeOptions] = useState([
     {
       id: 1,
       title: "Timed (60s)",
@@ -46,7 +49,35 @@ const App = () => {
       value: "passage",
       isActive: false,
     },
-  ];
+  ]);
+
+  const onDifficultyOptionClickHandler = (option: DropdownOption) => {
+    const newOptions = difficultyOptions
+      .map((difficultyOption) => ({
+        ...difficultyOption,
+        isActive: false,
+      }))
+      .map((difficultyOption) => ({
+        ...difficultyOption,
+        isActive: difficultyOption.id === option.id,
+      }));
+
+    setDifficultyOptions(newOptions);
+  };
+
+  const onModeOptionClickHandler = (option: DropdownOption) => {
+    const newOptions = modeOptions
+      .map((modeOption) => ({
+        ...modeOption,
+        isActive: false,
+      }))
+      .map((modeOption) => ({
+        ...modeOption,
+        isActive: modeOption.id === option.id,
+      }));
+
+    setModeOptions(newOptions);
+  };
 
   return (
     <>
@@ -56,8 +87,14 @@ const App = () => {
           <div className="border-b border-neutral-700 pb-4">
             <SeparatedList options={listOptions} />
             <div className="flex justify-between gap-x-2.5">
-              <DropdownToButtons options={difficultyOptions} />
-              <DropdownToButtons options={modeOptions} />
+              <DropdownToButtons
+                options={difficultyOptions}
+                onOptionClick={onDifficultyOptionClickHandler}
+              />
+              <DropdownToButtons
+                options={modeOptions}
+                onOptionClick={onModeOptionClickHandler}
+              />
             </div>
           </div>
         </div>
