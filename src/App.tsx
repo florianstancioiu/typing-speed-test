@@ -86,12 +86,15 @@ const App = () => {
         <div className="px-4 mb-8 md:px-8">
           <div className="border-b border-neutral-700 pb-4">
             <SeparatedList options={listOptions} />
-            <div className="flex justify-between gap-x-2.5">
+            <div className="flex justify-between gap-x-2.5 md:gap-x-0 md:justify-start">
               <DropdownToButtons
+                title="Difficulty"
                 options={difficultyOptions}
                 onOptionClick={onDifficultyOptionClickHandler}
+                className="md:mr-4 md:pr-4 border-r border-neutral-700"
               />
               <DropdownToButtons
+                title="Mode"
                 options={modeOptions}
                 onOptionClick={onModeOptionClickHandler}
               />
