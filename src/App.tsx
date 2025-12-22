@@ -1,108 +1,19 @@
 import { useState } from "react";
 
-import { type DropdownOption } from "./components/UI/DropdownToButtons/DropdownToButtons";
 import Header from "./components/UI/Header/Header";
-import SeparatedList from "./components/SeparatedList/SeparatedList";
-import DropdownToButtons from "./components/UI/DropdownToButtons/DropdownToButtons";
-import TextZone from "./components/TextZone/TextZone";
+import Stages from "./components/Stages/Stages";
+import { TypingContextProvider } from "./store/TypingContext";
+import { type PageState } from "./components/Stages/Stages";
 
 const App = () => {
-  const dummyText = `The archaeological expedition unearthed artifacts that complicated prevailing theories about Bronze Age trade networks. Obsidian from Anatolia, lapis lazuli from Afghanistan, and amber from the Baltic—all discovered in a single Mycenaean tomb—suggested commercial connections far more extensive than previously hypothesized. "We've underestimated ancient peoples' navigational capabilities and their appetite for luxury goods," the lead researcher observed. "Globalization isn't as modern as we assume."`;
-
-  const listOptions = [
-    { id: 1, title: "WPM:", value: 0 },
-    { id: 2, title: "Accuracy:", value: "100%" },
-    { id: 3, title: "Time:", value: "0:60" },
-  ];
-
-  const [difficultyOptions, setDifficultyOptions] = useState([
-    {
-      id: 1,
-      title: "Easy",
-      value: "easy",
-      isActive: false,
-    },
-    {
-      id: 2,
-      title: "Medium",
-      value: "medium",
-      isActive: false,
-    },
-    {
-      id: 3,
-      title: "Hard",
-      value: "hard",
-      isActive: true,
-    },
-  ]);
-
-  const [modeOptions, setModeOptions] = useState([
-    {
-      id: 1,
-      title: "Timed (60s)",
-      value: "timed-60-seconds",
-      isActive: true,
-    },
-    {
-      id: 2,
-      title: "Passage",
-      value: "passage",
-      isActive: false,
-    },
-  ]);
-
-  const onDifficultyOptionClickHandler = (option: DropdownOption) => {
-    const newOptions = difficultyOptions
-      .map((difficultyOption) => ({
-        ...difficultyOption,
-        isActive: false,
-      }))
-      .map((difficultyOption) => ({
-        ...difficultyOption,
-        isActive: difficultyOption.id === option.id,
-      }));
-
-    setDifficultyOptions(newOptions);
-  };
-
-  const onModeOptionClickHandler = (option: DropdownOption) => {
-    const newOptions = modeOptions
-      .map((modeOption) => ({
-        ...modeOption,
-        isActive: false,
-      }))
-      .map((modeOption) => ({
-        ...modeOption,
-        isActive: modeOption.id === option.id,
-      }));
-
-    setModeOptions(newOptions);
-  };
+  const [pageState, _setPageState] = useState<PageState>("not-started");
 
   return (
     <>
-      <Header />
-      <div className="md:pb-16">
-        <div className="px-4 mb-8 md:px-8">
-          <div className="border-b border-neutral-700 pb-4">
-            <SeparatedList options={listOptions} />
-            <div className="flex justify-between gap-x-2.5 md:gap-x-0 md:justify-start">
-              <DropdownToButtons
-                title="Difficulty"
-                options={difficultyOptions}
-                onOptionClick={onDifficultyOptionClickHandler}
-                className="md:mr-4 md:pr-4 border-r border-neutral-700"
-              />
-              <DropdownToButtons
-                title="Mode"
-                options={modeOptions}
-                onOptionClick={onModeOptionClickHandler}
-              />
-            </div>
-          </div>
-        </div>
-        <TextZone text={dummyText} typedText="" isStarted={false} />
-      </div>
+      <TypingContextProvider>
+        <Header />
+        <Stages currentStage={pageState} />
+      </TypingContextProvider>
     </>
   );
 };

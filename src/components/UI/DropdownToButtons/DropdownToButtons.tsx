@@ -9,19 +9,19 @@ export type DropdownOption = {
   isActive: boolean;
 };
 
-export type DropdownProps = {
+export type DropdownToButtonsProps = {
   options: DropdownOption[];
   title: string;
   className?: string;
   onOptionClick: (option: DropdownOption) => void;
 };
 
-const Dropdown = ({
+const DropdownToButtons = ({
   options,
   title,
   className,
   onOptionClick,
-}: DropdownProps) => {
+}: DropdownToButtonsProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const activeOption = options.find((option) => option.isActive) ?? options[0];
   let tabletClasses = "hidden md:inline-flex md:items-center";
@@ -104,4 +104,4 @@ const Dropdown = ({
   );
 };
 
-export default Dropdown;
+export default DropdownToButtons;

@@ -1,7 +1,7 @@
 import Button from "../UI/Button/Button";
 
 export type TextZoneProps = {
-  text: string;
+  text: string | undefined;
   typedText: string;
   isStarted: boolean;
 };
