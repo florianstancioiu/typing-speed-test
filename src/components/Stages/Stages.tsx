@@ -1,4 +1,5 @@
 import StageNotStarted from "../StageNotStarted/StageNotStarted";
+import StageStarted from "../StageStarted/StageStarted";
 
 export type PageState =
   | "not-started"
@@ -17,6 +18,12 @@ const Stages = ({ currentStage }: StagesProps) => {
       return (
         <div className="md:pb-16">
           <StageNotStarted />
+        </div>
+      );
+    case "started":
+      return (
+        <div className="md:pb-16">
+          <StageStarted />
         </div>
       );
   }

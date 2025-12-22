@@ -22,6 +22,11 @@ const TextZone = ({ text, isStarted }: TextZoneProps) => {
           </div>
         </div>
       )}
+      {isStarted && (
+        <div className="relative">
+          <p className="text-[32px] leading-[136%] tracking-[0.4px]">{text}</p>
+        </div>
+      )}
     </main>
   );
 };
