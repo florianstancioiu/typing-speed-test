@@ -109,5 +109,6 @@ Use this section to outline areas that you want to continue focusing on in futur
 | December 19th, 2025 | 3 hours    | I used Vite to create the initial project files, I installed TailwindCSS and vite-plugin-svgr, I created some base components for the "home" page, I enabled github actions. |
 | December 20th, 2025 | 3 hours    | I worked on the "Home - Not started" mobile page                                                                                                                             |
 | December 21st, 2025 | 3 hours    | I worked on the "Home - Not started" tablet page                                                                                                                             |
+| December 22nd, 2025 | 2.5 hours  | I made use of the useContext hook and tried to separate the stages of the app in different components                                                                        |
 
-_Total time spent working on the project:_ **9 hours**
+_Total time spent working on the project:_ **11.5 hours**
