@@ -116,6 +116,6 @@ export const TypingContextProvider = ({
   );
 };
 
-export const useTyping = () => {
+export const useTypingContext = () => {
   return useContext(TypingContext);
 };

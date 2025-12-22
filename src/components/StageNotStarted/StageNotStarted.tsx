@@ -1,7 +1,7 @@
 import SeparatedList from "../SeparatedList/SeparatedList";
 import DropdownToButtons from "../UI/DropdownToButtons/DropdownToButtons";
 import TextZone from "../TextZone/TextZone";
-import { useTyping } from "../../store/TypingContext";
+import { useTypingContext } from "../../store/TypingContext";
 
 const StageNotStarted = () => {
   const {
@@ -11,7 +11,7 @@ const StageNotStarted = () => {
     onDifficultyOptionClickHandler,
     modeOptions,
     onModeOptionClickHandler,
-  } = useTyping();
+  } = useTypingContext();
 
   return (
     <>
