@@ -1,8 +1,23 @@
-import { useContext, createContext, useState } from "react";
+import { useContext, createContext, useState, useReducer } from "react";
+import { type Dispatch } from "react";
 import { type ListOption } from "../components/SeparatedList/SeparatedList";
 import { type DropdownOption } from "../components/UI/DropdownToButtons/DropdownToButtons";
 
+export type Stats = {
+  wpm: number;
+  accuracy: number;
+  charactersRight: number;
+  charactersWrong: number;
+};
+
+export type StatsReducerAction = {
+  type: "setWPM" | "setAccuracy" | "setCharactersRight" | "setCharactersWrong";
+  payload: number;
+};
+
 export type TypingState = {
+  stats: Stats;
+  dispatchStats: Dispatch<StatsReducerAction>;
   dummyText: string | undefined;
   listOptions: ListOption[];
   difficultyOptions: DropdownOption[];
@@ -12,6 +27,13 @@ export type TypingState = {
 };
 
 const TypingContext = createContext<TypingState>({
+  stats: {
+    wpm: 85,
+    accuracy: 90,
+    charactersRight: 120,
+    charactersWrong: 5,
+  },
+  dispatchStats: () => {},
   dummyText: undefined,
   listOptions: [],
   difficultyOptions: [],
@@ -19,6 +41,19 @@ const TypingContext = createContext<TypingState>({
   onDifficultyOptionClickHandler: () => {},
   onModeOptionClickHandler: () => {},
 });
+
+const statsReducer = (state: Stats, action: StatsReducerAction) => {
+  switch (action.type) {
+    case "setWPM":
+      return { ...state, wpm: action.payload };
+    case "setAccuracy":
+      return { ...state, accuracy: action.payload };
+    case "setCharactersRight":
+      return { ...state, charactersRight: action.payload };
+    case "setCharactersWrong":
+      return { ...state, charactersWrong: action.payload };
+  }
+};
 
 export type TypingContextProviderProps = {
   children: React.ReactNode;
@@ -35,6 +70,13 @@ export const TypingContextProvider = ({
     { id: 2, title: "Accuracy:", value: "100%" },
     { id: 3, title: "Time:", value: "0:60" },
   ];
+
+  const [stats, dispatchStats] = useReducer(statsReducer, {
+    wpm: 85,
+    accuracy: 90,
+    charactersRight: 120,
+    charactersWrong: 5,
+  });
 
   const [difficultyOptions, setDifficultyOptions] = useState([
     {
@@ -103,6 +145,8 @@ export const TypingContextProvider = ({
   return (
     <TypingContext.Provider
       value={{
+        stats,
+        dispatchStats,
         dummyText,
         listOptions,
         difficultyOptions,
@@ -117,5 +161,13 @@ export const TypingContextProvider = ({
 };
 
 export const useTypingContext = () => {
-  return useContext(TypingContext);
+  const context = useContext(TypingContext);
+
+  if (!context) {
+    throw new Error(
+      "useTypingContext must be used within TypingContextProvider"
+    );
+  }
+
+  return context;
 };

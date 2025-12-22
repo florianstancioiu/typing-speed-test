@@ -1,5 +1,6 @@
 import StageNotStarted from "../StageNotStarted/StageNotStarted";
 import StageStarted from "../StageStarted/StageStarted";
+import StageHighScoreComplete from "../StageHighScoreComplete/StageHighScoreComplete";
 
 export type PageState =
   | "not-started"
@@ -18,6 +19,8 @@ const Stages = ({ currentStage }: StagesProps) => {
       return <StageNotStarted />;
     case "started":
       return <StageStarted />;
+    case "high-score-complete":
+      return <StageHighScoreComplete />;
   }
 };
 
