@@ -4,9 +4,9 @@ import StageStarted from "../StageStarted/StageStarted";
 export type PageState =
   | "not-started"
   | "started"
-  | "high-score"
-  | "new-high-score"
-  | "first-high-score";
+  | "high-score-complete"
+  | "high-score-smashed"
+  | "high-score-baseline";
 
 export type StagesProps = {
   currentStage: PageState;
@@ -15,17 +15,9 @@ export type StagesProps = {
 const Stages = ({ currentStage }: StagesProps) => {
   switch (currentStage) {
     case "not-started":
-      return (
-        <div className="md:pb-16">
-          <StageNotStarted />
-        </div>
-      );
+      return <StageNotStarted />;
     case "started":
-      return (
-        <div className="md:pb-16">
-          <StageStarted />
-        </div>
-      );
+      return <StageStarted />;
   }
 };
 
