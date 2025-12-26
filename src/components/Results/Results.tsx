@@ -12,7 +12,7 @@ const Results = ({
   charactersWrong,
 }: ResultsProps) => {
   return (
-    <div className="px-4 mb-10">
+    <div className="px-4 mb-10 relative">
       <div className="p-4 rounded-lg border border-neutral-700 mb-4">
         <p className="text-neutral-400 text-xl mb-3">WPM: </p>
         <p className="font-bold text-2xl text-white">{wpm}</p>

@@ -1,6 +1,6 @@
 import CompleteSvg from "../../images/icon-completed.svg?react";
 import RestartSvg from "../../images/icon-restart.svg?react";
-import StarPatternOneSvg from "../../images/pattern-star-1.svg?react";
+import StarPatternOneSvg from "../../images/star.svg?react";
 import StarPatternTwoSvg from "../../images/pattern-star-2.svg?react";
 
 import Results from "../Results/Results";
@@ -12,8 +12,9 @@ const StageHighScoreComplete = () => {
   const { wpm, accuracy, charactersRight, charactersWrong } = stats;
 
   return (
-    <div>
-      <div className="text-center px-4 mt-8 mb-6">
+    <div className="relative">
+      <div className="text-center px-4 mt-8 mb-6 relative">
+        <StarPatternTwoSvg className="absolute left-4 top-6" />
         <CompleteSvg className="inline-block shadow-green-circle rounded-full mb-7" />
         <p className="text-white text-2xl font-bold mb-2.5">Test Complete!</p>
         <p className="text-base text-neutral-400">
@@ -30,6 +31,7 @@ const StageHighScoreComplete = () => {
         <span>Go Again</span>
         <RestartSvg fill="#121212" />
       </Button>
+      <StarPatternOneSvg className="absolute -bottom-35 right-4" />
     </div>
   );
 };
