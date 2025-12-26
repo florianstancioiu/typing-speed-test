@@ -12,21 +12,21 @@ const Results = ({
   charactersWrong,
 }: ResultsProps) => {
   return (
-    <div>
-      <div>
-        <p>WPM: </p>
-        <p>{wpm}</p>
+    <div className="px-4 mb-10">
+      <div className="p-4 rounded-lg border border-neutral-700 mb-4">
+        <p className="text-neutral-400 text-xl mb-3">WPM: </p>
+        <p className="font-bold text-2xl text-white">{wpm}</p>
       </div>
-      <div>
-        <p>Accuracy: </p>
-        <p>{accuracy}%</p>
+      <div className="p-4 rounded-lg border border-neutral-700 mb-4">
+        <p className="text-neutral-400 text-xl mb-3">Accuracy: </p>
+        <p className="font-bold text-2xl text-red-500">{accuracy}%</p>
       </div>
-      <div>
-        <p>Characters:</p>
-        <p>
-          <span>{charactersRight}</span>
-          <span>/</span>
-          <span>{charactersWrong}</span>
+      <div className="p-4 rounded-lg border border-neutral-700 mb-4">
+        <p className="text-neutral-400 text-xl mb-3">Characters:</p>
+        <p className="font-bold text-2xl">
+          <span className="text-green-500">{charactersRight}</span>
+          <span className="text-neutral-500">/</span>
+          <span className="text-red-500">{charactersWrong}</span>
         </p>
       </div>
     </div>
