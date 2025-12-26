@@ -111,5 +111,6 @@ Use this section to outline areas that you want to continue focusing on in futur
 | December 21st, 2025 | 3 hours    | I worked on the "Home - Not started" tablet page                                                                                                                             |
 | December 22nd, 2025 | 2.5 hours  | I made use of the useContext hook and tried to separate the stages of the app in different components                                                                        |
 | December 22nd, 2025 | 1 hour     | I updated the useTypingContext to include the final stats object                                                                                                             |
+| December 26th, 2025 | 2 hour     | I worked on the StageHighScoreComplete mobile component                                                                                                                      |
 
-_Total time spent working on the project:_ **12.5 hours**
+_Total time spent working on the project:_ **14.5 hours**
