@@ -12,9 +12,9 @@ const StageHighScoreBaseline = () => {
   const { wpm, accuracy, charactersRight, charactersWrong } = stats;
 
   return (
-    <div className="relative">
-      <div className="text-center px-4 mt-8 mb-6 relative md:px-8 md:mt-20 md:pt-6 md:mb-13">
-        <StarPatternTwoSvg className="absolute left-4 top-6 md:left-12" />
+    <div className="relative xl:max-w-7xl xl:mx-auto">
+      <div className="text-center px-4 mt-8 mb-6 relative md:px-8 md:mt-20 md:pt-6 md:mb-13 xl:px-0">
+        <StarPatternTwoSvg className="absolute left-4 top-6 md:left-12 xl:left-0" />
         <CompleteSvg className="inline-block shadow-green-circle rounded-full mb-7 md:shadow-green-circle-large md:mb-14" />
         <p className="text-white text-2xl font-bold mb-2.5 md:text-4xl">
           Baseline Established!
@@ -30,10 +30,10 @@ const StageHighScoreBaseline = () => {
         charactersWrong={charactersWrong}
       />
       <Button className="rounded-xl py-2.5 px-4 bg-white text-neutral-900 flex items-center mx-auto gap-x-2.5 hover:opacity-90 focus-visible:outline-offset-4 focus-visible:outline-blue-400 focus-visible:outline-3">
-        <span>Go Again</span>
+        <span>Beat This Score</span>
         <RestartSvg fill="#121212" />
       </Button>
-      <StarPatternOneSvg className="absolute -bottom-35 right-4 md:-bottom-20 md:right-8 md:w-16 md:h-16" />
+      <StarPatternOneSvg className="absolute -bottom-35 right-4 md:-bottom-20 md:right-8 md:w-16 md:h-16 xl:right-0" />
     </div>
   );
 };

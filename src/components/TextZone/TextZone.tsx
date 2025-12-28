@@ -8,9 +8,9 @@ export type TextZoneProps = {
 
 const TextZone = ({ text, isStarted }: TextZoneProps) => {
   return (
-    <main className="px-4 border-b border-neutral-700 pb-4 mb-8">
+    <main className="px-4 mb-8 md:px-8 xl:max-w-7xl xl:mx-auto xl:px-0">
       {!isStarted && (
-        <div className="relative">
+        <div className="relative border-b border-neutral-700 pb-4">
           <p className="text-[32px] leading-[136%] tracking-[0.4px] blur-sm">
             {text}
           </p>

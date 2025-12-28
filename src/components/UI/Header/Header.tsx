@@ -3,7 +3,7 @@ import PersonalBest from "../../PersonalBest/PersonalBest";
 
 const Header = () => {
   return (
-    <header className="p-4 mb-8 flex justify-between items-center md:p-8 md:mb-10 md:pb-0">
+    <header className="p-4 mb-8 flex justify-between items-center md:p-8 md:mb-10 md:pb-0 xl:max-w-7xl xl:mx-auto xl:px-0">
       <div className="md:flex md:gap-x-2.5 md:items-center">
         <SmallLogo />
         <div className="hidden md:block">

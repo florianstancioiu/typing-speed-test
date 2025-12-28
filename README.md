@@ -95,6 +95,7 @@ Use this section to outline areas that you want to continue focusing on in futur
 - [`position-anchor` - new CSS property](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/position-anchor) - I would've used this property to style the popover menu on mobile but I use firefox and firefox doesn't currently support it
 - [React useContext - Optimizing re-renders when passing objects and functions ](https://react.dev/reference/react/useContext#optimizing-re-renders-when-passing-objects-and-functions) - This helped me optimize re-renders when using an object for context value
 - [Stackoverflow - Vite can't resolve import .d.ts file](https://stackoverflow.com/a/77191202/12159189) - This helped me fix an import type used for react-canvas-confetti
+- [What is the TypeScript definition for the onKeyDown event in React?](https://felixgerschau.com/react-typescript-onkeydown-event-type/) - This helped me set the event type for onKeyDown handler - I had to listen for enter key presses
 
 ## Author
 
