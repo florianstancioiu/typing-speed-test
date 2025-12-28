@@ -1,6 +1,7 @@
 import StageNotStarted from "../StageNotStarted/StageNotStarted";
 import StageStarted from "../StageStarted/StageStarted";
 import StageHighScoreComplete from "../StageHighScoreComplete/StageHighScoreComplete";
+import StageHighScoreSmashed from "../StageHighScoreSmashed/StageHighScoreSmashed";
 
 export type PageState =
   | "not-started"
@@ -21,6 +22,8 @@ const Stages = ({ currentStage }: StagesProps) => {
       return <StageStarted />;
     case "high-score-complete":
       return <StageHighScoreComplete />;
+    case "high-score-smashed":
+      return <StageHighScoreSmashed />;
   }
 };
 
