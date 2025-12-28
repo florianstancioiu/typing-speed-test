@@ -13,11 +13,13 @@ const StageHighScoreComplete = () => {
 
   return (
     <div className="relative">
-      <div className="text-center px-4 mt-8 mb-6 relative">
-        <StarPatternTwoSvg className="absolute left-4 top-6" />
-        <CompleteSvg className="inline-block shadow-green-circle rounded-full mb-7" />
-        <p className="text-white text-2xl font-bold mb-2.5">Test Complete!</p>
-        <p className="text-base text-neutral-400">
+      <div className="text-center px-4 mt-8 mb-6 relative md:px-8 md:mt-20 md:pt-6 md:mb-13">
+        <StarPatternTwoSvg className="absolute left-4 top-6 md:left-12" />
+        <CompleteSvg className="inline-block shadow-green-circle rounded-full mb-7 md:shadow-green-circle-large md:mb-14" />
+        <p className="text-white text-2xl font-bold mb-2.5 md:text-4xl">
+          Test Complete!
+        </p>
+        <p className="text-base text-neutral-400 md:text-xl">
           Solid run. Keep pushing to beat your high score.
         </p>
       </div>
@@ -31,7 +33,7 @@ const StageHighScoreComplete = () => {
         <span>Go Again</span>
         <RestartSvg fill="#121212" />
       </Button>
-      <StarPatternOneSvg className="absolute -bottom-35 right-4" />
+      <StarPatternOneSvg className="absolute -bottom-35 right-4 md:-bottom-20 md:right-8 md:w-16 md:h-16" />
     </div>
   );
 };

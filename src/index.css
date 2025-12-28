@@ -4,6 +4,9 @@
 
 @theme {
   --font-sora: "Sora", sans-serif;
+
   --shadow-green-circle: 0 0 0 7.5px rgba(77, 214, 123, 0.2),
     0 0 0 15px rgba(77, 214, 123, 0.1);
+  --shadow-green-circle-large: 0 0 0 16px rgba(77, 214, 123, 0.2),
+    0 0 0 32px rgba(77, 214, 123, 0.1);
 }
