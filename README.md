@@ -114,5 +114,6 @@ Use this section to outline areas that you want to continue focusing on in futur
 | December 22nd, 2025 | 2.5 hours  | I made use of the useContext hook and tried to separate the stages of the app in different components                                                                        |
 | December 22nd, 2025 | 1 hour     | I updated the useTypingContext to include the final stats object                                                                                                             |
 | December 26th, 2025 | 2 hours    | I worked on the StageHighScoreComplete mobile component                                                                                                                      |
+| December 28th, 2025 | 4 hours    | I worked on the desktop version for all page states, I also worked on the hover and focus-visible designs                                                                    |
 
-_Total time spent working on the project:_ **14.5 hours**
+_Total time spent working on the project:_ **18.5 hours**
