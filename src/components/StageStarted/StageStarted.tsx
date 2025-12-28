@@ -1,5 +1,5 @@
 import Button from "../UI/Button/Button";
-import RestartSvg from "../../images/icon-restart.svg?react";
+import RestartWhiteSvg from "../../images/icon-restart-white.svg?react";
 import SeparatedList from "../SeparatedList/SeparatedList";
 import DropdownToButtons from "../UI/DropdownToButtons/DropdownToButtons";
 import TextZone from "../TextZone/TextZone";
@@ -39,7 +39,7 @@ const StageStarted = () => {
       <div className="grid place-content-center mb-8">
         <Button className="flex gap-x-2.5 items-center bg-neutral-800 py-2.5 px-4">
           <span>Restart Test</span>
-          <RestartSvg />
+          <RestartWhiteSvg />
         </Button>
       </div>
     </div>
