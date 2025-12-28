@@ -15,7 +15,9 @@ const TextZone = ({ text, isStarted }: TextZoneProps) => {
             {text}
           </p>
           <div className="absolute h-full w-full left-0 top-0 grid place-content-center">
-            <Button className="mb-5">Start Typing Test</Button>
+            <Button className="mb-5 hover:bg-blue-400 focus-visible:outline-offset-4 focus-visible:outline-blue-400 focus-visible:outline-3">
+              Start Typing Test
+            </Button>
             <p className="font-semibold text-white text-xl ">
               Or click the text and start typing
             </p>

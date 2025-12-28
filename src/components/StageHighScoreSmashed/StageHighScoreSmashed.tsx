@@ -36,7 +36,7 @@ const StageHighScoreSmashed = () => {
         charactersRight={charactersRight}
         charactersWrong={charactersWrong}
       />
-      <Button className="rounded-xl py-2.5 px-4 bg-white text-neutral-900 flex items-center mx-auto gap-x-2.5">
+      <Button className="rounded-xl py-2.5 px-4 bg-white text-neutral-900 flex items-center mx-auto gap-x-2.5 hover:opacity-90 focus-visible:outline-offset-4 focus-visible:outline-blue-400 focus-visible:outline-3">
         <span>Beat This Score</span>
         <RestartSvg fill="#121212" />
       </Button>

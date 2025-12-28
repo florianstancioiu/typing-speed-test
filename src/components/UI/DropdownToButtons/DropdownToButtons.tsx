@@ -1,4 +1,5 @@
 import { cn } from "tailwind-cn";
+import type { KeyboardEvent } from "react";
 import { useState } from "react";
 import DownArrowSvg from "../../../images/icon-down-arrow.svg?react";
 
@@ -39,6 +40,16 @@ const DropdownToButtons = ({
     onOptionClick(option);
   };
 
+  const onKeyDownHandler = (
+    event: KeyboardEvent<HTMLLIElement>,
+    option: DropdownOption
+  ) => {
+    if (event.key === "Enter") {
+      setIsOpen(false);
+      onOptionClick(option);
+    }
+  };
+
   return (
     <>
       <div className={tabletClasses}>
@@ -46,19 +57,20 @@ const DropdownToButtons = ({
         <ul className="list-none flex justify-between items-center gap-x-1.5">
           {options.map((option) => {
             const baseClasses =
-              "text-white py-1.5 px-2.5 border border-neutral-500 rounded-lg text-base cursor-pointer select-none";
+              "text-white py-1.5 px-2.5 border border-neutral-500 rounded-lg text-base cursor-pointer select-none focus-visible:outline-offset-4 focus-visible:outline-blue-400 focus-visible:outline-3";
             const mergedClasses = cn(
               baseClasses,
               option.isActive ? "border-blue-400 text-blue-400" : ""
             );
 
             return (
-              <li
-                key={option.id}
-                onClick={() => onClickHandler(option)}
-                className={mergedClasses}
-              >
-                {option.title}
+              <li key={option.id}>
+                <button
+                  onClick={() => onClickHandler(option)}
+                  className={mergedClasses}
+                >
+                  {option.title}
+                </button>
               </li>
             );
           })}
@@ -84,6 +96,8 @@ const DropdownToButtons = ({
                   key={option.id}
                   onClick={() => onClickHandler(option)}
                   className={className}
+                  tabIndex={0}
+                  onKeyDown={(event) => onKeyDownHandler(event, option)}
                 >
                   {option.isActive && (
                     <span className="inline-grid w-4 h-4 border bg-blue-400 rounded-full mr-2.5 place-content-center">
