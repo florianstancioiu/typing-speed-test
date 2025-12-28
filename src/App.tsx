@@ -6,7 +6,7 @@ import { TypingContextProvider } from "./store/TypingContext";
 import { type PageState } from "./components/Stages/Stages";
 
 const App = () => {
-  const [pageState, _setPageState] = useState<PageState>("high-score-smashed");
+  const [pageState, _setPageState] = useState<PageState>("high-score-baseline");
 
   return (
     <>
