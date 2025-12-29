@@ -88,7 +88,7 @@ const DropdownToButtons = ({
           <ul className="list-none w-42 bg-neutral-800 rounded-lg mt-2 absolute left-0 top-10 z-10">
             {options.map((option, index) => {
               const isLastOption = index === options.length - 1;
-              let className = `sm:hidden flex items-center pl-2.5 py-2 cursor-pointer select-none `;
+              let className = `md:hidden flex items-center pl-2.5 py-2 cursor-pointer select-none `;
               className += isLastOption ? "" : " border-b border-neutral-700";
 
               return (

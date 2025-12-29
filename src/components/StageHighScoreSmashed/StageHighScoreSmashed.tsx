@@ -20,7 +20,7 @@ const StageHighScoreSmashed = () => {
   };
 
   return (
-    <div className="relative">
+    <div className="relative mb-10">
       <div className="text-center px-4 mt-8 mb-6 relative md:px-8 md:mt-20 md:pt-6 md:mb-13">
         <NewPersonalBestSvg className="inline-block rounded-full mb-7 md:mb-14" />
         <p className="text-white text-2xl font-bold mb-2.5 md:text-4xl">
