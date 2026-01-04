@@ -137,7 +137,7 @@ export const useTypingContext = () => {
 
   if (!context) {
     throw new Error(
-      "useTypingContext must be used within TypingContextProvider"
+      "useTypingContext must be used within <TypingContextProvider />"
     );
   }
 
