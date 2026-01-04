@@ -3,20 +3,13 @@ import StageStarted from "../StageStarted/StageStarted";
 import StageHighScoreComplete from "../StageHighScoreComplete/StageHighScoreComplete";
 import StageHighScoreSmashed from "../StageHighScoreSmashed/StageHighScoreSmashed";
 import StageHighScoreBaseline from "../StageHighScoreBaseline/StageHighScoreBaseline";
+import { useStageContext } from "../../store/StageContext";
 
-export type PageState =
-  | "not-started"
-  | "started"
-  | "high-score-complete"
-  | "high-score-smashed"
-  | "high-score-baseline";
+// TODO: Rename this component to Pages
+const Stages = () => {
+  const { stage } = useStageContext();
 
-export type StagesProps = {
-  currentStage: PageState;
-};
-
-const Stages = ({ currentStage }: StagesProps) => {
-  switch (currentStage) {
+  switch (stage) {
     case "not-started":
       return <StageNotStarted />;
     case "started":
