@@ -7,6 +7,8 @@ export type TextZoneProps = {
 };
 
 const TextZone = ({ text, isStarted }: TextZoneProps) => {
+  const characters = text?.split("");
+
   return (
     <main className="px-4 mb-8 md:px-8 xl:max-w-7xl xl:mx-auto xl:px-0">
       {!isStarted && (
@@ -26,7 +28,18 @@ const TextZone = ({ text, isStarted }: TextZoneProps) => {
       )}
       {isStarted && (
         <div className="relative">
-          <p className="text-[32px] leading-[136%] tracking-[0.4px]">{text}</p>
+          <p className="text-[32px] leading-[136%] tracking-[0.4px]">
+            {characters?.map((char) => {
+              /*
+              const correctClassName = "text-green-500";
+              const incorrectClassName =
+                "text-red-500 border-b-2 border-red-500";
+              */
+              const currentCharClassName = "text-neutral-400 bg-neutral-500";
+
+              return <span className={currentCharClassName}>{char}</span>;
+            })}
+          </p>
         </div>
       )}
     </main>

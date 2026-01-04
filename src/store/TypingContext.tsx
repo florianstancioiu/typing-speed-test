@@ -2,6 +2,7 @@ import { useContext, createContext, useState, useReducer } from "react";
 import { type Dispatch } from "react";
 import { type ListOption } from "../components/SeparatedList/SeparatedList";
 import { type DropdownOption } from "../components/UI/DropdownToButtons/DropdownToButtons";
+import data from "../data.json";
 
 import {
   initialStats,
@@ -40,16 +41,6 @@ export type TypingContextProviderProps = {
 export const TypingContextProvider = ({
   children,
 }: TypingContextProviderProps) => {
-  const textToType = `The archaeological expedition unearthed artifacts that complicated prevailing theories about Bronze Age trade networks. Obsidian from Anatolia, lapis lazuli from Afghanistan, and amber from the Baltic—all discovered in a single Mycenaean tomb—suggested commercial connections far more extensive than previously hypothesized. "We've underestimated ancient peoples' navigational capabilities and their appetite for luxury goods," the lead researcher observed. "Globalization isn't as modern as we assume."`;
-
-  const listOptions = [
-    { id: 1, title: "WPM:", value: 0 },
-    { id: 2, title: "Accuracy:", value: "100%" },
-    { id: 3, title: "Time:", value: "0:60" },
-  ];
-
-  const [stats, dispatchStats] = useReducer(statsReducer, initialStats);
-
   const [difficultyOptions, setDifficultyOptions] = useState([
     {
       id: 1,
@@ -70,6 +61,16 @@ export const TypingContextProvider = ({
       isActive: true,
     },
   ]);
+
+  const [textToType, _setTextToType] = useState(data.medium[0].text);
+
+  const listOptions = [
+    { id: 1, title: "WPM:", value: 0 },
+    { id: 2, title: "Accuracy:", value: "100%" },
+    { id: 3, title: "Time:", value: "0:60" },
+  ];
+
+  const [stats, dispatchStats] = useReducer(statsReducer, initialStats);
 
   const [modeOptions, setModeOptions] = useState([
     {
@@ -113,6 +114,24 @@ export const TypingContextProvider = ({
 
     setModeOptions(newOptions);
   };
+
+  /*
+  function setTextToTypeBasedOnDifficulty() {
+    const currentDifficulty = difficultyOptions.find(
+      (option) => option.isActive
+    );
+    if (currentDifficulty) {
+      const difficultyTextArray =
+        data[currentDifficulty.value as keyof typeof data];
+      const theText =
+        difficultyTextArray[
+          Math.floor(Math.random() * difficultyTextArray.length)
+        ].text;
+
+      setTextToType(theText);
+    }
+  }
+    */
 
   return (
     <TypingContext.Provider
