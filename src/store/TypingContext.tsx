@@ -3,22 +3,17 @@ import { type Dispatch } from "react";
 import { type ListOption } from "../components/SeparatedList/SeparatedList";
 import { type DropdownOption } from "../components/UI/DropdownToButtons/DropdownToButtons";
 
-export type Stats = {
-  wpm: number;
-  accuracy: number;
-  charactersRight: number;
-  charactersWrong: number;
-};
-
-export type StatsReducerAction = {
-  type: "setWPM" | "setAccuracy" | "setCharactersRight" | "setCharactersWrong";
-  payload: number;
-};
+import {
+  initialStats,
+  statsReducer,
+  type StatsReducerAction,
+  type Stats,
+} from "../reducers/statsReducer";
 
 export type TypingState = {
   stats: Stats;
   dispatchStats: Dispatch<StatsReducerAction>;
-  dummyText: string | undefined;
+  textToType: string | undefined;
   listOptions: ListOption[];
   difficultyOptions: DropdownOption[];
   modeOptions: DropdownOption[];
@@ -27,33 +22,15 @@ export type TypingState = {
 };
 
 const TypingContext = createContext<TypingState>({
-  stats: {
-    wpm: 85,
-    accuracy: 90,
-    charactersRight: 120,
-    charactersWrong: 5,
-  },
+  stats: initialStats,
   dispatchStats: () => {},
-  dummyText: undefined,
+  textToType: undefined,
   listOptions: [],
   difficultyOptions: [],
   modeOptions: [],
   onDifficultyOptionClickHandler: () => {},
   onModeOptionClickHandler: () => {},
 });
-
-const statsReducer = (state: Stats, action: StatsReducerAction) => {
-  switch (action.type) {
-    case "setWPM":
-      return { ...state, wpm: action.payload };
-    case "setAccuracy":
-      return { ...state, accuracy: action.payload };
-    case "setCharactersRight":
-      return { ...state, charactersRight: action.payload };
-    case "setCharactersWrong":
-      return { ...state, charactersWrong: action.payload };
-  }
-};
 
 export type TypingContextProviderProps = {
   children: React.ReactNode;
@@ -63,7 +40,7 @@ export type TypingContextProviderProps = {
 export const TypingContextProvider = ({
   children,
 }: TypingContextProviderProps) => {
-  const dummyText = `The archaeological expedition unearthed artifacts that complicated prevailing theories about Bronze Age trade networks. Obsidian from Anatolia, lapis lazuli from Afghanistan, and amber from the Baltic—all discovered in a single Mycenaean tomb—suggested commercial connections far more extensive than previously hypothesized. "We've underestimated ancient peoples' navigational capabilities and their appetite for luxury goods," the lead researcher observed. "Globalization isn't as modern as we assume."`;
+  const textToType = `The archaeological expedition unearthed artifacts that complicated prevailing theories about Bronze Age trade networks. Obsidian from Anatolia, lapis lazuli from Afghanistan, and amber from the Baltic—all discovered in a single Mycenaean tomb—suggested commercial connections far more extensive than previously hypothesized. "We've underestimated ancient peoples' navigational capabilities and their appetite for luxury goods," the lead researcher observed. "Globalization isn't as modern as we assume."`;
 
   const listOptions = [
     { id: 1, title: "WPM:", value: 0 },
@@ -71,12 +48,7 @@ export const TypingContextProvider = ({
     { id: 3, title: "Time:", value: "0:60" },
   ];
 
-  const [stats, dispatchStats] = useReducer(statsReducer, {
-    wpm: 85,
-    accuracy: 90,
-    charactersRight: 120,
-    charactersWrong: 5,
-  });
+  const [stats, dispatchStats] = useReducer(statsReducer, initialStats);
 
   const [difficultyOptions, setDifficultyOptions] = useState([
     {
@@ -147,7 +119,7 @@ export const TypingContextProvider = ({
       value={{
         stats,
         dispatchStats,
-        dummyText,
+        textToType,
         listOptions,
         difficultyOptions,
         onDifficultyOptionClickHandler,

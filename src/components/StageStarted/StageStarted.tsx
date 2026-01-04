@@ -7,7 +7,7 @@ import { useTypingContext } from "../../store/TypingContext";
 
 const StageStarted = () => {
   const {
-    dummyText,
+    textToType,
     listOptions,
     difficultyOptions,
     onDifficultyOptionClickHandler,
@@ -35,7 +35,7 @@ const StageStarted = () => {
           </div>
         </div>
       </div>
-      <TextZone text={dummyText} typedText="" isStarted={true} />
+      <TextZone text={textToType} typedText="" isStarted={true} />
       <div className="grid place-content-center mb-8">
         <Button className="flex gap-x-2.5 items-center bg-neutral-800 py-2.5 px-4">
           <span>Restart Test</span>

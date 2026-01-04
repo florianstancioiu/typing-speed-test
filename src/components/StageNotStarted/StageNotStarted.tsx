@@ -5,7 +5,7 @@ import { useTypingContext } from "../../store/TypingContext";
 
 const StageNotStarted = () => {
   const {
-    dummyText,
+    textToType,
     listOptions,
     difficultyOptions,
     onDifficultyOptionClickHandler,
@@ -33,7 +33,7 @@ const StageNotStarted = () => {
           </div>
         </div>
       </div>
-      <TextZone text={dummyText} typedText="" isStarted={false} />
+      <TextZone text={textToType} typedText="" isStarted={false} />
     </div>
   );
 };
