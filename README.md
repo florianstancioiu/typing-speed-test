@@ -96,6 +96,7 @@ Use this section to outline areas that you want to continue focusing on in futur
 - [React useContext - Optimizing re-renders when passing objects and functions ](https://react.dev/reference/react/useContext#optimizing-re-renders-when-passing-objects-and-functions) - This helped me optimize re-renders when using an object for context value
 - [Stackoverflow - Vite can't resolve import .d.ts file](https://stackoverflow.com/a/77191202/12159189) - This helped me fix an import type used for react-canvas-confetti
 - [What is the TypeScript definition for the onKeyDown event in React?](https://felixgerschau.com/react-typescript-onkeydown-event-type/) - This helped me set the event type for onKeyDown handler - I had to listen for enter key presses
+- [Stackoverflow - Get a random item from a JavaScript array [duplicate]](https://stackoverflow.com/a/5915122/12159189) - This helped get a random array value to use as the main text
 
 ## Author
 
@@ -115,5 +116,6 @@ Use this section to outline areas that you want to continue focusing on in futur
 | December 22nd, 2025 | 1 hour     | I updated the useTypingContext to include the final stats object                                                                                                             |
 | December 26th, 2025 | 2 hours    | I worked on the StageHighScoreComplete mobile component                                                                                                                      |
 | December 28th, 2025 | 4 hours    | I worked on the desktop version for all page states, I also worked on the hover and focus-visible designs                                                                    |
+| January 4th, 2026   | 2 hours    | I worked on the TypingContext and StageContext                                                                                                                               |
 
-_Total time spent working on the project:_ **18.5 hours**
+_Total time spent working on the project:_ **20.5 hours**
