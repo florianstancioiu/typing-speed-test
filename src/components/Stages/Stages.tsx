@@ -3,11 +3,10 @@ import StageStarted from "../StageStarted/StageStarted";
 import StageHighScoreComplete from "../StageHighScoreComplete/StageHighScoreComplete";
 import StageHighScoreSmashed from "../StageHighScoreSmashed/StageHighScoreSmashed";
 import StageHighScoreBaseline from "../StageHighScoreBaseline/StageHighScoreBaseline";
-import { useStageContext } from "../../store/StageContext";
+import { useTypingContext } from "../../store/TypingContext";
 
-// TODO: Rename this component to Pages
 const Stages = () => {
-  const { stage } = useStageContext();
+  const { stage } = useTypingContext();
 
   switch (stage) {
     case "not-started":

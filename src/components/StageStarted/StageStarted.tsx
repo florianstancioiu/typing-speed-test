@@ -10,6 +10,7 @@ const StageStarted = () => {
     textToType,
     listOptions,
     difficultyOptions,
+    textThatWasTyped,
     onDifficultyOptionClickHandler,
     modeOptions,
     onModeOptionClickHandler,
@@ -35,7 +36,11 @@ const StageStarted = () => {
           </div>
         </div>
       </div>
-      <TextZone text={textToType} typedText="" isStarted={true} />
+      <TextZone
+        text={textToType}
+        typedText={textThatWasTyped}
+        isStarted={true}
+      />
       <div className="grid place-content-center mb-8">
         <Button className="flex gap-x-2.5 items-center bg-neutral-800 py-2.5 px-4">
           <span>Restart Test</span>

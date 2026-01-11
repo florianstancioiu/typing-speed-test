@@ -1,4 +1,10 @@
-import { useContext, createContext, useState, useReducer } from "react";
+import {
+  useContext,
+  createContext,
+  useState,
+  useReducer,
+  useEffect,
+} from "react";
 import { type Dispatch } from "react";
 import { type ListOption } from "../components/SeparatedList/SeparatedList";
 import { type DropdownOption } from "../components/UI/DropdownToButtons/DropdownToButtons";
@@ -11,9 +17,20 @@ import {
   type Stats,
 } from "../reducers/statsReducer";
 
+export type Stage =
+  | "not-started"
+  | "started"
+  | "high-score-complete"
+  | "high-score-smashed"
+  | "high-score-baseline";
+
 export type TypingState = {
   stats: Stats;
   dispatchStats: Dispatch<StatsReducerAction>;
+  stage: Stage;
+  setStage: (stage: Stage) => void;
+  keyPosition: number;
+  textThatWasTyped: string;
   textToType: string | undefined;
   listOptions: ListOption[];
   difficultyOptions: DropdownOption[];
@@ -25,6 +42,10 @@ export type TypingState = {
 const TypingContext = createContext<TypingState>({
   stats: initialStats,
   dispatchStats: () => {},
+  stage: "not-started" as Stage,
+  setStage: () => {},
+  keyPosition: 0,
+  textThatWasTyped: "",
   textToType: undefined,
   listOptions: [],
   difficultyOptions: [],
@@ -62,7 +83,11 @@ export const TypingContextProvider = ({
     },
   ]);
 
+  const [stage, setStage] = useState<Stage>("not-started");
+  const [_seconds, _setSeconds] = useState(60);
+  const [keyPosition, setKeyPosition] = useState(0);
   const [textToType, _setTextToType] = useState(data.medium[0].text);
+  const [textThatWasTyped, setTextThatWasTyped] = useState("");
 
   const listOptions = [
     { id: 1, title: "WPM:", value: 0 },
@@ -86,6 +111,48 @@ export const TypingContextProvider = ({
       isActive: false,
     },
   ]);
+
+  useEffect(() => {
+    const keyDownHandler = (event: KeyboardEvent) => {
+      const ignoredKeys = [
+        "Shift",
+        "Backspace",
+        "CapsLock",
+        "Tab",
+        "Control",
+        "Enter",
+      ];
+
+      if (!ignoredKeys.includes(event.key)) {
+        setStage("started");
+        setKeyPosition((val) => val + 1);
+        setTextThatWasTyped((val) => `${val}${event.key}`);
+      }
+
+      if (event.key === "Backspace") {
+        setKeyPosition((val) => {
+          if (val - 1 > 0) {
+            return val - 1;
+          }
+
+          return 0;
+        });
+        setTextThatWasTyped((val) => {
+          if (val.length === 0) {
+            return "";
+          }
+
+          return val.substring(0, val.length - 1);
+        });
+      }
+    };
+
+    document.addEventListener("keydown", keyDownHandler);
+
+    return () => {
+      document.removeEventListener("keydown", keyDownHandler);
+    };
+  }, []);
 
   const onDifficultyOptionClickHandler = (option: DropdownOption) => {
     const newOptions = difficultyOptions
@@ -138,7 +205,11 @@ export const TypingContextProvider = ({
       value={{
         stats,
         dispatchStats,
+        stage,
+        setStage,
         textToType,
+        keyPosition,
+        textThatWasTyped,
         listOptions,
         difficultyOptions,
         onDifficultyOptionClickHandler,
