@@ -117,5 +117,6 @@ Use this section to outline areas that you want to continue focusing on in futur
 | December 26th, 2025 | 2 hours    | I worked on the StageHighScoreComplete mobile component                                                                                                                      |
 | December 28th, 2025 | 4 hours    | I worked on the desktop version for all page states, I also worked on the hover and focus-visible designs                                                                    |
 | January 4th, 2026   | 2 hours    | I worked on the TypingContext and StageContext                                                                                                                               |
+| January 11th, 2026  | 1.5 hours  | I made a bit of progress on the functionality, you can now start typing and get a visual representation of your accuracy                                                     |
 
-_Total time spent working on the project:_ **20.5 hours**
+_Total time spent working on the project:_ **22 hours**

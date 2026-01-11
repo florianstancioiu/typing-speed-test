@@ -6,7 +6,7 @@ import { useTypingContext } from "./store/TypingContext";
 import type { Stage } from "./store/TypingContext";
 
 const App = () => {
-  const { setStage } = useTypingContext();
+  const { stage, setStage } = useTypingContext();
 
   const stages: Stage[] = [
     "not-started",
@@ -19,6 +19,7 @@ const App = () => {
   return (
     <>
       <select
+        value={stage}
         onChange={(event: ChangeEvent<HTMLSelectElement>) => {
           setStage(event.target.value as Stage);
         }}
