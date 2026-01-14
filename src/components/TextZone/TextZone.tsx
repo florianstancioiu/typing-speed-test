@@ -62,6 +62,7 @@ const TextZone = ({ text, typedText, isStarted }: TextZoneProps) => {
                   );
                 }
               }
+
               if (index === typedCharacters.length) {
                 return (
                   <span key={index} className="text-neutral-400 bg-neutral-500">

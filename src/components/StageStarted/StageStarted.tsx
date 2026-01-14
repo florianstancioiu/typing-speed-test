@@ -14,6 +14,7 @@ const StageStarted = () => {
     onDifficultyOptionClickHandler,
     modeOptions,
     onModeOptionClickHandler,
+    restartTest,
   } = useTypingContext();
 
   return (
@@ -42,7 +43,10 @@ const StageStarted = () => {
         isStarted={true}
       />
       <div className="grid place-content-center mb-8">
-        <Button className="flex gap-x-2.5 items-center bg-neutral-800 py-2.5 px-4">
+        <Button
+          onClick={restartTest}
+          className="flex gap-x-2.5 items-center bg-neutral-800 py-2.5 px-4"
+        >
           <span>Restart Test</span>
           <RestartWhiteSvg />
         </Button>

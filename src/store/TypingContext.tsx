@@ -17,6 +17,13 @@ import {
   type Stats,
 } from "../reducers/statsReducer";
 
+export type DifficultyOption = {
+  id: number;
+  title: string;
+  value: string;
+  isActive: boolean;
+};
+
 export type Stage =
   | "not-started"
   | "started"
@@ -29,6 +36,7 @@ export type TypingState = {
   dispatchStats: Dispatch<StatsReducerAction>;
   stage: Stage;
   setStage: (stage: Stage) => void;
+  restartTest: () => void;
   keyPosition: number;
   textThatWasTyped: string;
   textToType: string | undefined;
@@ -44,6 +52,7 @@ const TypingContext = createContext<TypingState>({
   dispatchStats: () => {},
   stage: "not-started" as Stage,
   setStage: () => {},
+  restartTest: () => {},
   keyPosition: 0,
   textThatWasTyped: "",
   textToType: undefined,
@@ -73,21 +82,24 @@ export const TypingContextProvider = ({
       id: 2,
       title: "Medium",
       value: "medium",
-      isActive: false,
+      isActive: true,
     },
     {
       id: 3,
       title: "Hard",
       value: "hard",
-      isActive: true,
+      isActive: false,
     },
   ]);
 
   const [stage, setStage] = useState<Stage>("not-started");
   const [_seconds, _setSeconds] = useState(60);
   const [keyPosition, setKeyPosition] = useState(0);
-  const [textToType, _setTextToType] = useState(data.medium[0].text);
+  const [textToType, setTextToType] = useState(data.medium[0].text);
   const [textThatWasTyped, setTextThatWasTyped] = useState("");
+  const [wpm, setWpm] = useState(0);
+  const [accuracy, setAccuracy] = useState(0);
+  const [time, setTime] = useState(60);
 
   const listOptions = [
     { id: 1, title: "WPM:", value: 0 },
@@ -112,6 +124,33 @@ export const TypingContextProvider = ({
     },
   ]);
 
+  const restartTest = () => {
+    setWpm(0);
+    setAccuracy(0);
+    setTime(60);
+    setKeyPosition(0);
+    setTextThatWasTyped("");
+  };
+
+  const setTextToTypeBasedOnDifficulty = (
+    difficultyOptions: DifficultyOption[]
+  ) => {
+    const currentDifficulty = difficultyOptions.find(
+      (option) => option.isActive
+    );
+
+    if (currentDifficulty) {
+      const difficultyTextArray =
+        data[currentDifficulty.value as keyof typeof data];
+      const theText =
+        difficultyTextArray[
+          Math.floor(Math.random() * difficultyTextArray.length)
+        ].text;
+
+      setTextToType(theText);
+    }
+  };
+
   useEffect(() => {
     const keyDownHandler = (event: KeyboardEvent) => {
       const ignoredKeys = [
@@ -121,6 +160,7 @@ export const TypingContextProvider = ({
         "Tab",
         "Control",
         "Enter",
+        "Alt",
       ];
 
       if (!ignoredKeys.includes(event.key)) {
@@ -147,6 +187,7 @@ export const TypingContextProvider = ({
       }
     };
 
+    setTextToTypeBasedOnDifficulty(difficultyOptions);
     document.addEventListener("keydown", keyDownHandler);
 
     return () => {
@@ -166,6 +207,7 @@ export const TypingContextProvider = ({
       }));
 
     setDifficultyOptions(newOptions);
+    setTextToTypeBasedOnDifficulty(newOptions);
   };
 
   const onModeOptionClickHandler = (option: DropdownOption) => {
@@ -182,24 +224,6 @@ export const TypingContextProvider = ({
     setModeOptions(newOptions);
   };
 
-  /*
-  function setTextToTypeBasedOnDifficulty() {
-    const currentDifficulty = difficultyOptions.find(
-      (option) => option.isActive
-    );
-    if (currentDifficulty) {
-      const difficultyTextArray =
-        data[currentDifficulty.value as keyof typeof data];
-      const theText =
-        difficultyTextArray[
-          Math.floor(Math.random() * difficultyTextArray.length)
-        ].text;
-
-      setTextToType(theText);
-    }
-  }
-    */
-
   return (
     <TypingContext.Provider
       value={{
@@ -207,6 +231,7 @@ export const TypingContextProvider = ({
         dispatchStats,
         stage,
         setStage,
+        restartTest,
         textToType,
         keyPosition,
         textThatWasTyped,
