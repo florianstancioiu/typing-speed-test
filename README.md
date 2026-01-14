@@ -6,7 +6,6 @@ This is a solution to the [Typing Speed Test challenge on Frontend Mentor](https
 
 - [Overview](#overview)
   - [The challenge](#the-challenge)
-  - [Optional challenges](#optional-challenges)
   - [Screenshot](#screenshot)
   - [Links](#links)
 - [My process](#my-process)
@@ -47,14 +46,6 @@ Users should be able to:
 
 - View the optimal layout depending on their device's screen size
 - See hover and focus states for all interactive elements
-
-### Optional challenges
-
-1.  Add multiple test durations (15s, 30s, 60s, 120s)
-2.  Add different text categories to type, such as famous quotes, song lyrics, or code snippets
-3.  Track WPM and accuracy over time using local storage
-4.  Add a keyboard heatmap showing errors and keypress frequency
-5.  Create shareable result cards for social media
 
 ### Screenshot
 
