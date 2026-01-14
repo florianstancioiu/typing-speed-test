@@ -109,5 +109,6 @@ Use this section to outline areas that you want to continue focusing on in futur
 | December 28th, 2025 | 4 hours    | I worked on the desktop version for all page states, I also worked on the hover and focus-visible designs                                                                    |
 | January 4th, 2026   | 2 hours    | I worked on the TypingContext and StageContext                                                                                                                               |
 | January 11th, 2026  | 1.5 hours  | I made a bit of progress on the functionality, you can now start typing and get a visual representation of your accuracy                                                     |
+| January 14th, 2026  | 2 hours    | I tried to implement the countdown timer using setInterval, I didn't manage to do it today but I hope I will complete it tomorrow                                            |
 
-_Total time spent working on the project:_ **22 hours**
+_Total time spent working on the project:_ **24 hours**
