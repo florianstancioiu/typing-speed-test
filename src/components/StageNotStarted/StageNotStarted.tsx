@@ -6,12 +6,17 @@ import { useTypingContext } from "../../store/TypingContext";
 const StageNotStarted = () => {
   const {
     textToType,
-    listOptions,
     difficultyOptions,
     onDifficultyOptionClickHandler,
     modeOptions,
     onModeOptionClickHandler,
   } = useTypingContext();
+
+  const listOptions = [
+    { id: 1, title: "WPM:", value: 0 },
+    { id: 2, title: "Accuracy:", value: "0%" },
+    { id: 3, title: "Time:", value: "0:60" },
+  ];
 
   return (
     <div className="md:pb-16 xl:max-w-7xl xl:mx-auto">

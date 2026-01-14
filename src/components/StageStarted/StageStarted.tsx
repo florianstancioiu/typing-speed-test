@@ -7,8 +7,10 @@ import { useTypingContext } from "../../store/TypingContext";
 
 const StageStarted = () => {
   const {
+    wpm,
+    accuracy,
+    time,
     textToType,
-    listOptions,
     difficultyOptions,
     textThatWasTyped,
     onDifficultyOptionClickHandler,
@@ -16,6 +18,14 @@ const StageStarted = () => {
     onModeOptionClickHandler,
     restartTest,
   } = useTypingContext();
+
+  console.log("time is: ", time);
+
+  const listOptions = [
+    { id: 1, title: "WPM:", value: wpm },
+    { id: 2, title: "Accuracy:", value: accuracy },
+    { id: 3, title: "Time:", value: time },
+  ];
 
   return (
     <div className="md:pb-16">

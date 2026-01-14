@@ -3,10 +3,10 @@ import {
   createContext,
   useState,
   useReducer,
+  useRef,
   useEffect,
 } from "react";
 import { type Dispatch } from "react";
-import { type ListOption } from "../components/SeparatedList/SeparatedList";
 import { type DropdownOption } from "../components/UI/DropdownToButtons/DropdownToButtons";
 import data from "../data.json";
 
@@ -32,15 +32,18 @@ export type Stage =
   | "high-score-baseline";
 
 export type TypingState = {
+  isStarted: boolean;
+  wpm: number;
+  accuracy: number;
+  time: number;
   stats: Stats;
   dispatchStats: Dispatch<StatsReducerAction>;
   stage: Stage;
   setStage: (stage: Stage) => void;
-  restartTest: () => void;
+  restartTest: (setNotStartedStage?: boolean) => void;
   keyPosition: number;
   textThatWasTyped: string;
   textToType: string | undefined;
-  listOptions: ListOption[];
   difficultyOptions: DropdownOption[];
   modeOptions: DropdownOption[];
   onDifficultyOptionClickHandler: (option: DropdownOption) => void;
@@ -48,6 +51,10 @@ export type TypingState = {
 };
 
 const TypingContext = createContext<TypingState>({
+  isStarted: false,
+  wpm: 0,
+  accuracy: 0,
+  time: 60,
   stats: initialStats,
   dispatchStats: () => {},
   stage: "not-started" as Stage,
@@ -56,7 +63,6 @@ const TypingContext = createContext<TypingState>({
   keyPosition: 0,
   textThatWasTyped: "",
   textToType: undefined,
-  listOptions: [],
   difficultyOptions: [],
   modeOptions: [],
   onDifficultyOptionClickHandler: () => {},
@@ -92,20 +98,15 @@ export const TypingContextProvider = ({
     },
   ]);
 
+  const [isStarted, setIsStarted] = useState(false);
+  const intervalRef = useRef<ReturnType<typeof setInterval>>(0);
   const [stage, setStage] = useState<Stage>("not-started");
-  const [_seconds, _setSeconds] = useState(60);
   const [keyPosition, setKeyPosition] = useState(0);
   const [textToType, setTextToType] = useState(data.medium[0].text);
   const [textThatWasTyped, setTextThatWasTyped] = useState("");
   const [wpm, setWpm] = useState(0);
   const [accuracy, setAccuracy] = useState(0);
   const [time, setTime] = useState(60);
-
-  const listOptions = [
-    { id: 1, title: "WPM:", value: 0 },
-    { id: 2, title: "Accuracy:", value: "100%" },
-    { id: 3, title: "Time:", value: "0:60" },
-  ];
 
   const [stats, dispatchStats] = useReducer(statsReducer, initialStats);
 
@@ -124,12 +125,16 @@ export const TypingContextProvider = ({
     },
   ]);
 
-  const restartTest = () => {
+  const restartTest = (setNotStartedStage: boolean = false) => {
     setWpm(0);
     setAccuracy(0);
     setTime(60);
     setKeyPosition(0);
     setTextThatWasTyped("");
+
+    if (setNotStartedStage) {
+      setStage("not-started");
+    }
   };
 
   const setTextToTypeBasedOnDifficulty = (
@@ -147,8 +152,32 @@ export const TypingContextProvider = ({
           Math.floor(Math.random() * difficultyTextArray.length)
         ].text;
 
+      restartTest(true);
       setTextToType(theText);
     }
+  };
+
+  const countdown = () => {
+    if (isStarted) {
+      return;
+    }
+
+    intervalRef.current = setInterval(() => {
+      if (keyPosition > 0) {
+        setTime((val) => {
+          if (val <= 1) {
+            clearInterval(intervalRef.current);
+            return 0;
+          }
+
+          return val - 1;
+        });
+      }
+
+      if (keyPosition === textToType.length || time <= 0) {
+        setStage("high-score-complete");
+      }
+    }, 1000);
   };
 
   useEffect(() => {
@@ -161,10 +190,12 @@ export const TypingContextProvider = ({
         "Control",
         "Enter",
         "Alt",
+        "NumLock",
       ];
 
       if (!ignoredKeys.includes(event.key)) {
         setStage("started");
+        setIsStarted(true);
         setKeyPosition((val) => val + 1);
         setTextThatWasTyped((val) => `${val}${event.key}`);
       }
@@ -187,6 +218,7 @@ export const TypingContextProvider = ({
       }
     };
 
+    countdown();
     setTextToTypeBasedOnDifficulty(difficultyOptions);
     document.addEventListener("keydown", keyDownHandler);
 
@@ -227,6 +259,10 @@ export const TypingContextProvider = ({
   return (
     <TypingContext.Provider
       value={{
+        isStarted,
+        wpm,
+        accuracy,
+        time,
         stats,
         dispatchStats,
         stage,
@@ -235,7 +271,6 @@ export const TypingContextProvider = ({
         textToType,
         keyPosition,
         textThatWasTyped,
-        listOptions,
         difficultyOptions,
         onDifficultyOptionClickHandler,
         modeOptions,
