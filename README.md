@@ -110,5 +110,6 @@ Use this section to outline areas that you want to continue focusing on in futur
 | January 4th, 2026   | 2 hours    | I worked on the TypingContext and StageContext                                                                                                                               |
 | January 11th, 2026  | 1.5 hours  | I made a bit of progress on the functionality, you can now start typing and get a visual representation of your accuracy                                                     |
 | January 14th, 2026  | 2 hours    | I tried to implement the countdown timer using setInterval, I didn't manage to do it today but I hope I will complete it tomorrow                                            |
+| April 23rd, 2026    | 1.5 hours  | I split the TypingContext in a bunch of different context files                                                                                                              |
 
-_Total time spent working on the project:_ **24 hours**
+_Total time spent working on the project:_ **25.5 hours**
