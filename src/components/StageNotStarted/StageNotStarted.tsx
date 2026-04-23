@@ -1,16 +1,13 @@
 import SeparatedList from "../SeparatedList/SeparatedList";
 import DropdownToButtons from "../UI/DropdownToButtons/DropdownToButtons";
 import TextZone from "../TextZone/TextZone";
-import { useDifficultyAndModeContext } from "../../store/DifficultyAndModeContext";
+import { useDifficultyContext } from "../../store/DifficultyContext";
+import { useModeContext } from "../../store/ModeContext";
 
 const StageNotStarted = () => {
-  const {
-    textToType,
-    difficultyOptions,
-    onDifficultyOptionClickHandler,
-    modeOptions,
-    onModeOptionClickHandler,
-  } = useDifficultyAndModeContext();
+  const { textToType, difficultyOptions, onDifficultyOptionClickHandler } =
+    useDifficultyContext();
+  const { modeOptions, onModeOptionClickHandler } = useModeContext();
 
   const listOptions = [
     { id: 1, title: "WPM:", value: 0 },

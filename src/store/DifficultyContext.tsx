@@ -9,29 +9,26 @@ export type DifficultyOption = {
   isActive: boolean;
 };
 
-export type TypingState = {
+export type DifficultyState = {
   textToType: string | undefined;
   difficultyOptions: DropdownOption[];
   onDifficultyOptionClickHandler: (option: DropdownOption) => void;
-  modeOptions: DropdownOption[];
-  onModeOptionClickHandler: (option: DropdownOption) => void;
 };
 
-const DifficultyAndModeContext = createContext<TypingState>({
+const DifficultyContext = createContext<DifficultyState>({
   textToType: undefined,
   difficultyOptions: [],
   onDifficultyOptionClickHandler: () => {},
-  modeOptions: [],
-  onModeOptionClickHandler: () => {},
 });
 
-export type DifficultyAndModeContextProviderProps = {
+export type DifficultyContextProviderProps = {
   children: React.ReactNode;
 };
 
-export const DifficultyAndModeContextProvider = ({
+export const DifficultyContextProvider = ({
   children,
-}: DifficultyAndModeContextProviderProps) => {
+}: DifficultyContextProviderProps) => {
+  const [textToType, setTextToType] = useState(data.medium[0].text);
   const [difficultyOptions, setDifficultyOptions] = useState([
     {
       id: 1,
@@ -49,21 +46,6 @@ export const DifficultyAndModeContextProvider = ({
       id: 3,
       title: "Hard",
       value: "hard",
-      isActive: false,
-    },
-  ]);
-  const [textToType, setTextToType] = useState(data.medium[0].text);
-  const [modeOptions, setModeOptions] = useState([
-    {
-      id: 1,
-      title: "Timed (60s)",
-      value: "timed-60-seconds",
-      isActive: true,
-    },
-    {
-      id: 2,
-      title: "Passage",
-      value: "passage",
       isActive: false,
     },
   ]);
@@ -87,8 +69,6 @@ export const DifficultyAndModeContextProvider = ({
     }
   };
 
-  // setTextToTypeBasedOnDifficulty(difficultyOptions);
-
   const onDifficultyOptionClickHandler = (option: DropdownOption) => {
     const newOptions = difficultyOptions
       .map((difficultyOption) => ({
@@ -104,41 +84,25 @@ export const DifficultyAndModeContextProvider = ({
     setTextToTypeBasedOnDifficulty(newOptions);
   };
 
-  const onModeOptionClickHandler = (option: DropdownOption) => {
-    const newOptions = modeOptions
-      .map((modeOption) => ({
-        ...modeOption,
-        isActive: false,
-      }))
-      .map((modeOption) => ({
-        ...modeOption,
-        isActive: modeOption.id === option.id,
-      }));
-
-    setModeOptions(newOptions);
-  };
-
   return (
-    <DifficultyAndModeContext.Provider
+    <DifficultyContext.Provider
       value={{
         textToType,
         difficultyOptions,
         onDifficultyOptionClickHandler,
-        modeOptions,
-        onModeOptionClickHandler,
       }}
     >
       {children}
-    </DifficultyAndModeContext.Provider>
+    </DifficultyContext.Provider>
   );
 };
 
-export const useDifficultyAndModeContext = () => {
-  const context = useContext(DifficultyAndModeContext);
+export const useDifficultyContext = () => {
+  const context = useContext(DifficultyContext);
 
   if (!context) {
     throw new Error(
-      "useDifficultyAndModeContext must be used within <DifficultyAndModeContext />",
+      "useDifficultyContext must be used within <DifficultyContextProvider />",
     );
   }
 
