@@ -1,13 +1,16 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { TypingContextProvider } from "./store/TypingContext.tsx";
+import { StageContextProvider } from "./store/StageContext.tsx";
 import App from "./App.tsx";
 import "./index.css";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <TypingContextProvider>
-      <App />
-    </TypingContextProvider>
-  </StrictMode>
+    <StageContextProvider>
+      <TypingContextProvider>
+        <App />
+      </TypingContextProvider>
+    </StageContextProvider>
+  </StrictMode>,
 );

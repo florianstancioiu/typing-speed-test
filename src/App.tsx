@@ -2,11 +2,11 @@ import type { ChangeEvent } from "react";
 
 import Header from "./components/UI/Header/Header";
 import Stages from "./components/Stages/Stages";
-import { useTypingContext } from "./store/TypingContext";
-import type { Stage } from "./store/TypingContext";
+import { useStageContext } from "./store/StageContext";
+import type { Stage } from "./store/StageContext";
 
 const App = () => {
-  const { stage, setStage } = useTypingContext();
+  const { stage, setStage } = useStageContext();
 
   const stages: Stage[] = [
     "not-started",

@@ -24,22 +24,12 @@ export type DifficultyOption = {
   isActive: boolean;
 };
 
-export type Stage =
-  | "not-started"
-  | "started"
-  | "high-score-complete"
-  | "high-score-smashed"
-  | "high-score-baseline";
-
 export type TypingState = {
-  isStarted: boolean;
   wpm: number;
   accuracy: number;
   time: number;
   stats: Stats;
   dispatchStats: Dispatch<StatsReducerAction>;
-  stage: Stage;
-  setStage: (stage: Stage) => void;
   restartTest: (setNotStartedStage?: boolean) => void;
   keyPosition: number;
   textThatWasTyped: string;
@@ -51,14 +41,11 @@ export type TypingState = {
 };
 
 const TypingContext = createContext<TypingState>({
-  isStarted: false,
   wpm: 0,
   accuracy: 0,
   time: 60,
   stats: initialStats,
   dispatchStats: () => {},
-  stage: "not-started" as Stage,
-  setStage: () => {},
   restartTest: () => {},
   keyPosition: 0,
   textThatWasTyped: "",
@@ -97,10 +84,6 @@ export const TypingContextProvider = ({
       isActive: false,
     },
   ]);
-
-  const [isStarted, setIsStarted] = useState(false);
-  const intervalRef = useRef<ReturnType<typeof setInterval>>(0);
-  const [stage, setStage] = useState<Stage>("not-started");
   const [keyPosition, setKeyPosition] = useState(0);
   const [textToType, setTextToType] = useState(data.medium[0].text);
   const [textThatWasTyped, setTextThatWasTyped] = useState("");
@@ -125,23 +108,19 @@ export const TypingContextProvider = ({
     },
   ]);
 
-  const restartTest = (setNotStartedStage: boolean = false) => {
+  const restartTest = (_setNotStartedStage: boolean = false) => {
     setWpm(0);
     setAccuracy(0);
     setTime(60);
     setKeyPosition(0);
     setTextThatWasTyped("");
-
-    if (setNotStartedStage) {
-      setStage("not-started");
-    }
   };
 
   const setTextToTypeBasedOnDifficulty = (
-    difficultyOptions: DifficultyOption[]
+    difficultyOptions: DifficultyOption[],
   ) => {
     const currentDifficulty = difficultyOptions.find(
-      (option) => option.isActive
+      (option) => option.isActive,
     );
 
     if (currentDifficulty) {
@@ -155,29 +134,6 @@ export const TypingContextProvider = ({
       restartTest(true);
       setTextToType(theText);
     }
-  };
-
-  const countdown = () => {
-    if (isStarted) {
-      return;
-    }
-
-    intervalRef.current = setInterval(() => {
-      if (keyPosition > 0) {
-        setTime((val) => {
-          if (val <= 1) {
-            clearInterval(intervalRef.current);
-            return 0;
-          }
-
-          return val - 1;
-        });
-      }
-
-      if (keyPosition === textToType.length || time <= 0) {
-        setStage("high-score-complete");
-      }
-    }, 1000);
   };
 
   useEffect(() => {
@@ -194,8 +150,6 @@ export const TypingContextProvider = ({
       ];
 
       if (!ignoredKeys.includes(event.key)) {
-        setStage("started");
-        setIsStarted(true);
         setKeyPosition((val) => val + 1);
         setTextThatWasTyped((val) => `${val}${event.key}`);
       }
@@ -218,7 +172,6 @@ export const TypingContextProvider = ({
       }
     };
 
-    countdown();
     setTextToTypeBasedOnDifficulty(difficultyOptions);
     document.addEventListener("keydown", keyDownHandler);
 
@@ -259,14 +212,11 @@ export const TypingContextProvider = ({
   return (
     <TypingContext.Provider
       value={{
-        isStarted,
         wpm,
         accuracy,
         time,
         stats,
         dispatchStats,
-        stage,
-        setStage,
         restartTest,
         textToType,
         keyPosition,
@@ -287,7 +237,7 @@ export const useTypingContext = () => {
 
   if (!context) {
     throw new Error(
-      "useTypingContext must be used within <TypingContextProvider />"
+      "useTypingContext must be used within <TypingContextProvider />",
     );
   }
 

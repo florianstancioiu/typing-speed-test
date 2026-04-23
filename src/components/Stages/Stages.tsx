@@ -3,10 +3,10 @@ import StageStarted from "../StageStarted/StageStarted";
 import StageHighScoreComplete from "../StageHighScoreComplete/StageHighScoreComplete";
 import StageHighScoreSmashed from "../StageHighScoreSmashed/StageHighScoreSmashed";
 import StageHighScoreBaseline from "../StageHighScoreBaseline/StageHighScoreBaseline";
-import { useTypingContext } from "../../store/TypingContext";
+import { useStageContext } from "../../store/StageContext";
 
 const Stages = () => {
-  const { stage } = useTypingContext();
+  const { stage } = useStageContext();
 
   switch (stage) {
     case "not-started":
