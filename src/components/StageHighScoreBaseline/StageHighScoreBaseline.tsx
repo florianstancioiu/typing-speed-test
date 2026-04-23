@@ -5,10 +5,10 @@ import StarPatternTwoSvg from "../../images/pattern-star-2.svg?react";
 
 import Results from "../Results/Results";
 import Button from "../UI/Button/Button";
-import { useTypingContext } from "../../store/TypingContext";
+import { useStatsContext } from "../../store/StatsContext";
 
 const StageHighScoreBaseline = () => {
-  const { stats } = useTypingContext();
+  const { stats } = useStatsContext();
   const { wpm, accuracy, charactersRight, charactersWrong } = stats;
 
   return (

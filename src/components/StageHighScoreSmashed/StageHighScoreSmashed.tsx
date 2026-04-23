@@ -5,10 +5,10 @@ import type { TConductorInstance } from "react-canvas-confetti/dist/types";
 
 import Results from "../Results/Results";
 import Button from "../UI/Button/Button";
-import { useTypingContext } from "../../store/TypingContext";
+import { useStatsContext } from "../../store/StatsContext";
 
 const StageHighScoreSmashed = () => {
-  const { stats } = useTypingContext();
+  const { stats } = useStatsContext();
   const { wpm, accuracy, charactersRight, charactersWrong } = stats;
 
   const onRealisticConfettiInitHandler = ({

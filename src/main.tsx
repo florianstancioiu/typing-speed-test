@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import { TypingContextProvider } from "./store/TypingContext.tsx";
 import { StageContextProvider } from "./store/StageContext.tsx";
 import { DifficultyAndModeContextProvider } from "./store/DifficultyAndModeContext.tsx";
+import { StatsContextProvider } from "./store/StatsContext.tsx";
 import App from "./App.tsx";
 import "./index.css";
 
@@ -11,7 +12,9 @@ createRoot(document.getElementById("root")!).render(
     <StageContextProvider>
       <DifficultyAndModeContextProvider>
         <TypingContextProvider>
-          <App />
+          <StatsContextProvider>
+            <App />
+          </StatsContextProvider>
         </TypingContextProvider>
       </DifficultyAndModeContextProvider>
     </StageContextProvider>

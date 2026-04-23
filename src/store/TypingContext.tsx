@@ -1,36 +1,12 @@
-import {
-  useContext,
-  createContext,
-  useState,
-  useReducer,
-  useEffect,
-} from "react";
-import { type Dispatch } from "react";
-
-import {
-  initialStats,
-  statsReducer,
-  type StatsReducerAction,
-  type Stats,
-} from "../reducers/statsReducer";
+import { useContext, createContext, useState, useEffect } from "react";
 
 export type TypingState = {
-  wpm: number;
-  accuracy: number;
-  time: number;
-  stats: Stats;
-  dispatchStats: Dispatch<StatsReducerAction>;
   restartTest: (setNotStartedStage?: boolean) => void;
   keyPosition: number;
   textThatWasTyped: string;
 };
 
 const TypingContext = createContext<TypingState>({
-  wpm: 0,
-  accuracy: 0,
-  time: 60,
-  stats: initialStats,
-  dispatchStats: () => {},
   restartTest: () => {},
   keyPosition: 0,
   textThatWasTyped: "",
@@ -46,15 +22,8 @@ export const TypingContextProvider = ({
 }: TypingContextProviderProps) => {
   const [keyPosition, setKeyPosition] = useState(0);
   const [textThatWasTyped, setTextThatWasTyped] = useState("");
-  const [wpm, setWpm] = useState(0);
-  const [accuracy, setAccuracy] = useState(0);
-  const [time, setTime] = useState(60);
-  const [stats, dispatchStats] = useReducer(statsReducer, initialStats);
 
   const restartTest = (_setNotStartedStage: boolean = false) => {
-    setWpm(0);
-    setAccuracy(0);
-    setTime(60);
     setKeyPosition(0);
     setTextThatWasTyped("");
   };
@@ -105,11 +74,6 @@ export const TypingContextProvider = ({
   return (
     <TypingContext.Provider
       value={{
-        wpm,
-        accuracy,
-        time,
-        stats,
-        dispatchStats,
         restartTest,
         keyPosition,
         textThatWasTyped,

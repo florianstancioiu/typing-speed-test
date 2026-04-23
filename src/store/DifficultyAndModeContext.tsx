@@ -29,7 +29,6 @@ export type DifficultyAndModeContextProviderProps = {
   children: React.ReactNode;
 };
 
-// TODO: Re-Read useContext documentation to optimize for re-renders
 export const DifficultyAndModeContextProvider = ({
   children,
 }: DifficultyAndModeContextProviderProps) => {

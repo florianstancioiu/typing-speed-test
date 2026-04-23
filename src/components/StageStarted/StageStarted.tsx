@@ -5,10 +5,11 @@ import DropdownToButtons from "../UI/DropdownToButtons/DropdownToButtons";
 import TextZone from "../TextZone/TextZone";
 import { useTypingContext } from "../../store/TypingContext";
 import { useDifficultyAndModeContext } from "../../store/DifficultyAndModeContext";
+import { useStatsContext } from "../../store/StatsContext";
 
 const StageStarted = () => {
-  const { wpm, accuracy, time, textThatWasTyped, restartTest } =
-    useTypingContext();
+  const { textThatWasTyped, restartTest } = useTypingContext();
+  const { wpm, accuracy, time } = useStatsContext();
 
   const {
     textToType,
