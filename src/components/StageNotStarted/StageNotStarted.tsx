@@ -1,7 +1,7 @@
 import SeparatedList from "../SeparatedList/SeparatedList";
 import DropdownToButtons from "../UI/DropdownToButtons/DropdownToButtons";
 import TextZone from "../TextZone/TextZone";
-import { useTypingContext } from "../../store/TypingContext";
+import { useDifficultyAndModeContext } from "../../store/DifficultyAndModeContext";
 
 const StageNotStarted = () => {
   const {
@@ -10,7 +10,7 @@ const StageNotStarted = () => {
     onDifficultyOptionClickHandler,
     modeOptions,
     onModeOptionClickHandler,
-  } = useTypingContext();
+  } = useDifficultyAndModeContext();
 
   const listOptions = [
     { id: 1, title: "WPM:", value: 0 },

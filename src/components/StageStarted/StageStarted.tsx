@@ -4,20 +4,19 @@ import SeparatedList from "../SeparatedList/SeparatedList";
 import DropdownToButtons from "../UI/DropdownToButtons/DropdownToButtons";
 import TextZone from "../TextZone/TextZone";
 import { useTypingContext } from "../../store/TypingContext";
+import { useDifficultyAndModeContext } from "../../store/DifficultyAndModeContext";
 
 const StageStarted = () => {
+  const { wpm, accuracy, time, textThatWasTyped, restartTest } =
+    useTypingContext();
+
   const {
-    wpm,
-    accuracy,
-    time,
     textToType,
     difficultyOptions,
-    textThatWasTyped,
     onDifficultyOptionClickHandler,
     modeOptions,
     onModeOptionClickHandler,
-    restartTest,
-  } = useTypingContext();
+  } = useDifficultyAndModeContext();
 
   console.log("time is: ", time);
 
