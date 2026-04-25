@@ -1,15 +1,15 @@
 import { useContext, createContext, useState, useEffect } from "react";
 
 export type TypingState = {
-  restartTest: (setNotStartedStage?: boolean) => void;
   keyPosition: number;
   textThatWasTyped: string;
+  setTextThatWasTyped: React.Dispatch<React.SetStateAction<string>>;
 };
 
 const TypingContext = createContext<TypingState>({
-  restartTest: () => {},
   keyPosition: 0,
   textThatWasTyped: "",
+  setTextThatWasTyped: () => {},
 });
 
 export type TypingContextProviderProps = {
@@ -22,11 +22,6 @@ export const TypingContextProvider = ({
 }: TypingContextProviderProps) => {
   const [keyPosition, setKeyPosition] = useState(0);
   const [textThatWasTyped, setTextThatWasTyped] = useState("");
-
-  const restartTest = (_setNotStartedStage: boolean = false) => {
-    setKeyPosition(0);
-    setTextThatWasTyped("");
-  };
 
   useEffect(() => {
     const keyDownHandler = (event: KeyboardEvent) => {
@@ -74,9 +69,9 @@ export const TypingContextProvider = ({
   return (
     <TypingContext.Provider
       value={{
-        restartTest,
         keyPosition,
         textThatWasTyped,
+        setTextThatWasTyped,
       }}
     >
       {children}

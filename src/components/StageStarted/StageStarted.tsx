@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import Button from "../UI/Button/Button";
 import RestartWhiteSvg from "../../images/icon-restart-white.svg?react";
 import SeparatedList from "../SeparatedList/SeparatedList";
@@ -7,23 +8,71 @@ import { useTypingContext } from "../../store/TypingContext";
 import { useDifficultyContext } from "../../store/DifficultyContext";
 import { useStatsContext } from "../../store/StatsContext";
 import { useModeContext } from "../../store/ModeContext";
+import { useStageContext } from "../../store/StageContext";
+import { computeAccuracy, computeWpm } from "../../helpers/stats";
+
+let globalInterval: number;
 
 const StageStarted = () => {
-  const { textThatWasTyped, restartTest } = useTypingContext();
-  const { wpm, accuracy, time } = useStatsContext();
-
+  const { textThatWasTyped, setTextThatWasTyped } = useTypingContext();
+  const { wpm, setWpm, accuracy, setAccuracy, time, setTime } =
+    useStatsContext();
   const { textToType, difficultyOptions, onDifficultyOptionClickHandler } =
     useDifficultyContext();
-
   const { modeOptions, onModeOptionClickHandler } = useModeContext();
+  const { isStarted, setIsStarted, setStage } = useStageContext();
 
-  console.log("time is: ", time);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (!isStarted) {
+        return;
+      }
+
+      if (time === 0) {
+        setStage("high-score-baseline");
+        clearInterval(interval);
+      }
+
+      if (time !== 0 && textThatWasTyped.length !== textToType.length) {
+        setTime((val) => --val);
+      }
+    }, 1000);
+
+    globalInterval = interval;
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [isStarted, time]);
+
+  useEffect(() => {
+    if (textThatWasTyped.length === textToType.length) {
+      setStage("high-score-baseline");
+      clearInterval(globalInterval);
+    }
+
+    const { accuracy: computedAccuracy } = computeAccuracy(
+      textThatWasTyped,
+      textToType,
+    );
+    setAccuracy(computedAccuracy);
+    setWpm(computeWpm(textThatWasTyped, 60));
+  }, [textThatWasTyped]);
 
   const listOptions = [
     { id: 1, title: "WPM:", value: wpm },
-    { id: 2, title: "Accuracy:", value: accuracy },
-    { id: 3, title: "Time:", value: time },
+    { id: 2, title: "Accuracy:", value: accuracy + "%" },
+    { id: 3, title: "Time:", value: time + "s" },
   ];
+
+  const restartTest = () => {
+    setTextThatWasTyped("");
+    setIsStarted(false);
+    setTime(60);
+    setAccuracy(0);
+    setWpm(0);
+    setStage("started");
+  };
 
   return (
     <div className="md:pb-16">

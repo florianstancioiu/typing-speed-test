@@ -1,4 +1,4 @@
-import { useContext, createContext, useState } from "react";
+import { useContext, createContext, useState, useEffect } from "react";
 
 export type Stage =
   | "not-started"
@@ -30,6 +30,18 @@ export const StageContextProvider = ({
 }: StageContextProviderProps) => {
   const [isStarted, setIsStarted] = useState(true);
   const [stage, setStage] = useState<Stage>("not-started");
+
+  useEffect(() => {
+    const keyDownHandler = () => {
+      setIsStarted(true);
+    };
+
+    document.addEventListener("keydown", keyDownHandler);
+
+    return () => {
+      document.removeEventListener("keydown", keyDownHandler);
+    };
+  }, []);
 
   return (
     <StageContext.Provider

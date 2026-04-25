@@ -10,13 +10,13 @@ export type DifficultyOption = {
 };
 
 export type DifficultyState = {
-  textToType: string | undefined;
+  textToType: string;
   difficultyOptions: DropdownOption[];
   onDifficultyOptionClickHandler: (option: DropdownOption) => void;
 };
 
 const DifficultyContext = createContext<DifficultyState>({
-  textToType: undefined,
+  textToType: "",
   difficultyOptions: [],
   onDifficultyOptionClickHandler: () => {},
 });
@@ -28,7 +28,7 @@ export type DifficultyContextProviderProps = {
 export const DifficultyContextProvider = ({
   children,
 }: DifficultyContextProviderProps) => {
-  const [textToType, setTextToType] = useState(data.medium[0].text);
+  const [textToType, setTextToType] = useState<string>(data.medium[0].text);
   const [difficultyOptions, setDifficultyOptions] = useState([
     {
       id: 1,

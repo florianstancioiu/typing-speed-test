@@ -1,12 +1,5 @@
-import { useContext, createContext, useState, useReducer } from "react";
-import { type Dispatch } from "react";
-
-import {
-  initialStats,
-  statsReducer,
-  type StatsReducerAction,
-  type Stats,
-} from "../reducers/statsReducer";
+import { useContext, createContext, useState } from "react";
+import { initialStats } from "../reducers/statsReducer";
 
 export type StatsState = {
   wpm: number;
@@ -14,9 +7,7 @@ export type StatsState = {
   accuracy: number;
   setAccuracy: (accuracy: number) => void;
   time: number;
-  setTime: (time: number) => void;
-  stats: Stats;
-  dispatchStats: Dispatch<StatsReducerAction>;
+  setTime: React.Dispatch<React.SetStateAction<number>>;
 };
 
 const StatsContext = createContext<StatsState>({
@@ -25,9 +16,7 @@ const StatsContext = createContext<StatsState>({
   accuracy: 0,
   setAccuracy: (_accuracy: number) => {},
   time: 60,
-  setTime: (_time: number) => {},
-  stats: initialStats,
-  dispatchStats: () => {},
+  setTime: () => {},
 });
 
 export type StatsContextProviderProps = {
@@ -40,7 +29,6 @@ export const StatsContextProvider = ({
   const [wpm, setWpm] = useState(initialStats.wpm);
   const [accuracy, setAccuracy] = useState(initialStats.accuracy);
   const [time, setTime] = useState(60);
-  const [stats, dispatchStats] = useReducer(statsReducer, initialStats);
 
   return (
     <StatsContext.Provider
@@ -51,8 +39,6 @@ export const StatsContextProvider = ({
         setAccuracy,
         time,
         setTime,
-        stats,
-        dispatchStats,
       }}
     >
       {children}

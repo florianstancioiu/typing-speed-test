@@ -88,6 +88,7 @@ Use this section to outline areas that you want to continue focusing on in futur
 - [Stackoverflow - Vite can't resolve import .d.ts file](https://stackoverflow.com/a/77191202/12159189) - This helped me fix an import type used for react-canvas-confetti
 - [What is the TypeScript definition for the onKeyDown event in React?](https://felixgerschau.com/react-typescript-onkeydown-event-type/) - This helped me set the event type for onKeyDown handler - I had to listen for enter key presses
 - [Stackoverflow - Get a random item from a JavaScript array [duplicate]](https://stackoverflow.com/a/5915122/12159189) - This helped get a random array value to use as the main text
+- [Guys how is WPM calculated?](https://www.reddit.com/r/typing/comments/1h014p7/comment/lz0rsl2/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button) - This helped me calculate the WPM
 
 ## Author
 
@@ -111,5 +112,6 @@ Use this section to outline areas that you want to continue focusing on in futur
 | January 11th, 2026  | 1.5 hours  | I made a bit of progress on the functionality, you can now start typing and get a visual representation of your accuracy                                                     |
 | January 14th, 2026  | 2 hours    | I tried to implement the countdown timer using setInterval, I didn't manage to do it today but I hope I will complete it tomorrow                                            |
 | April 23rd, 2026    | 1.5 hours  | I split the TypingContext in a bunch of different context files                                                                                                              |
+| April 25rd, 2026    | 2 hours    | I made the app functional using the splitted contexts                                                                                                                        |
 
-_Total time spent working on the project:_ **25.5 hours**
+_Total time spent working on the project:_ **27.5 hours**

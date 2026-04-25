@@ -12,7 +12,7 @@ const StageNotStarted = () => {
   const listOptions = [
     { id: 1, title: "WPM:", value: 0 },
     { id: 2, title: "Accuracy:", value: "0%" },
-    { id: 3, title: "Time:", value: "0:60" },
+    { id: 3, title: "Time:", value: "60s" },
   ];
 
   return (
