@@ -6,10 +6,18 @@ import type { TConductorInstance } from "react-canvas-confetti/dist/types";
 import Results from "../Results/Results";
 import Button from "../UI/Button/Button";
 import { useStatsContext } from "../../store/StatsContext";
+import { useTypingContext } from "../../store/TypingContext";
+import { useDifficultyContext } from "../../store/DifficultyContext";
+import { computeAccuracy } from "../../helpers/stats";
 
 const StageHighScoreSmashed = () => {
-  const { stats } = useStatsContext();
-  const { wpm, accuracy, charactersRight, charactersWrong } = stats;
+  const { wpm, accuracy } = useStatsContext();
+  const { textThatWasTyped } = useTypingContext();
+  const { textToType } = useDifficultyContext();
+  const { correctChars, incorrectChars } = computeAccuracy(
+    textThatWasTyped,
+    textToType,
+  );
 
   const onRealisticConfettiInitHandler = ({
     conductor,
@@ -33,8 +41,8 @@ const StageHighScoreSmashed = () => {
       <Results
         wpm={wpm}
         accuracy={accuracy}
-        charactersRight={charactersRight}
-        charactersWrong={charactersWrong}
+        charactersRight={correctChars}
+        charactersWrong={incorrectChars}
       />
       <Button className="rounded-xl py-2.5 px-4 bg-white text-neutral-900 flex items-center mx-auto gap-x-2.5 hover:opacity-90 focus-visible:outline-offset-4 focus-visible:outline-blue-400 focus-visible:outline-3">
         <span>Beat This Score</span>
