@@ -10,12 +10,27 @@ import { useTypingContext } from "../../context/TypingContext";
 import { computeAccuracy } from "../../helpers/stats";
 
 const StageHighScoreComplete = () => {
-  const { wpm, accuracy } = useStatsContext();
-  const { textThatWasTyped, textToType } = useTypingContext();
+  const { wpm, accuracy, setAccuracy, setWpm } = useStatsContext();
+  const {
+    textThatWasTyped,
+    textToType,
+    setTextThatWasTyped,
+    setIsStarted,
+    setTime,
+    setStage,
+  } = useTypingContext();
   const { correctChars, incorrectChars } = computeAccuracy(
     textThatWasTyped,
     textToType,
   );
+  const restartTest = () => {
+    setTextThatWasTyped("");
+    setIsStarted(false);
+    setTime(60);
+    setAccuracy(0);
+    setWpm(0);
+    setStage("not-started");
+  };
 
   return (
     <div className="relative xl:max-w-7xl xl:mx-auto">
@@ -35,7 +50,10 @@ const StageHighScoreComplete = () => {
         charactersRight={correctChars}
         charactersWrong={incorrectChars}
       />
-      <Button className="rounded-xl py-2.5 px-4 bg-white text-neutral-900 flex items-center mx-auto gap-x-2.5 hover:opacity-90 focus-visible:outline-offset-4 focus-visible:outline-blue-400 focus-visible:outline-3">
+      <Button
+        onClick={restartTest}
+        className="rounded-xl py-2.5 px-4 bg-white text-neutral-900 flex items-center mx-auto gap-x-2.5 hover:opacity-90 focus-visible:outline-offset-4 focus-visible:outline-blue-400 focus-visible:outline-3"
+      >
         <span>Go Again</span>
         <RestartSvg fill="#121212" />
       </Button>
