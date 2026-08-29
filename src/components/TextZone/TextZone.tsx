@@ -10,7 +10,7 @@ export type TextZoneProps = {
 const TextZone = ({ text, typedText, isStarted }: TextZoneProps) => {
   const characters = text?.split("");
   const typedCharacters = typedText.split("");
-  console.log("typedCharacters: ", typedCharacters);
+  // console.log("typedCharacters: ", typedCharacters);
   const { setStage } = useTypingContext();
 
   const startTyping = () => {

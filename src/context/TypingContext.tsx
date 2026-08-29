@@ -58,7 +58,6 @@ export type TypingContextProviderProps = {
   children: React.ReactNode;
 };
 
-// TODO: Re-Read useContext documentation to optimize for re-renders
 export const TypingContextProvider = ({
   children,
 }: TypingContextProviderProps) => {
@@ -89,6 +88,85 @@ export const TypingContextProvider = ({
       isActive: false,
     },
   ]);
+
+  useEffect(() => {
+    const keyDownHandler = () => {
+      setIsStarted(true);
+    };
+
+    document.addEventListener("keydown", keyDownHandler);
+
+    return () => {
+      document.removeEventListener("keydown", keyDownHandler);
+    };
+  }, []);
+
+  useEffect(() => {
+    intervalRef.current = setInterval(() => {
+      if (!isStarted || stage !== "started") {
+        return;
+      }
+
+      // daca timpul a ajuns la zero sau daca ai introdus destule caractere
+      // arati stageul potrivit si inchei jocul
+      // verifici daca e new best sau high score sau baseline
+      if (time <= 0) {
+        setStage("high-score-baseline");
+      } else {
+        // in caz contrar decrementezi timpul
+        setTime((timeVal) => --timeVal);
+      }
+    }, 1000);
+
+    return () => clearInterval(intervalRef.current);
+  }, [isStarted, stage, time]);
+
+  useEffect(() => {
+    const keyDownHandler = (event: KeyboardEvent) => {
+      const ignoredKeys = [
+        "Shift",
+        "Backspace",
+        "CapsLock",
+        "Tab",
+        "Control",
+        "Enter",
+        "Alt",
+        "NumLock",
+      ];
+
+      if (textThatWasTyped.length >= textToType.length) {
+        return;
+      }
+
+      if (!ignoredKeys.includes(event.key)) {
+        setKeyPosition((val) => val + 1);
+        setTextThatWasTyped((val) => `${val}${event.key}`);
+      }
+
+      if (event.key === "Backspace") {
+        setKeyPosition((val) => {
+          if (val - 1 > 0) {
+            return val - 1;
+          }
+
+          return 0;
+        });
+        setTextThatWasTyped((val) => {
+          if (val.length === 0) {
+            return "";
+          }
+
+          return val.substring(0, val.length - 1);
+        });
+      }
+    };
+
+    document.addEventListener("keydown", keyDownHandler);
+
+    return () => {
+      document.removeEventListener("keydown", keyDownHandler);
+    };
+  }, [textThatWasTyped, textToType]);
 
   const setTextToTypeBasedOnDifficulty = (
     difficultyOptions: DifficultyOption[],
@@ -126,83 +204,6 @@ export const TypingContextProvider = ({
     },
     [difficultyOptions],
   );
-
-  useEffect(() => {
-    const keyDownHandler = () => {
-      setIsStarted(true);
-    };
-
-    document.addEventListener("keydown", keyDownHandler);
-
-    return () => {
-      document.removeEventListener("keydown", keyDownHandler);
-    };
-  }, []);
-
-  useEffect(() => {
-    const keyDownHandler = (event: KeyboardEvent) => {
-      const ignoredKeys = [
-        "Shift",
-        "Backspace",
-        "CapsLock",
-        "Tab",
-        "Control",
-        "Enter",
-        "Alt",
-        "NumLock",
-      ];
-
-      if (!ignoredKeys.includes(event.key)) {
-        setKeyPosition((val) => val + 1);
-        setTextThatWasTyped((val) => `${val}${event.key}`);
-      }
-
-      if (event.key === "Backspace") {
-        setKeyPosition((val) => {
-          if (val - 1 > 0) {
-            return val - 1;
-          }
-
-          return 0;
-        });
-        setTextThatWasTyped((val) => {
-          if (val.length === 0) {
-            return "";
-          }
-
-          return val.substring(0, val.length - 1);
-        });
-      }
-    };
-
-    document.addEventListener("keydown", keyDownHandler);
-
-    return () => {
-      document.removeEventListener("keydown", keyDownHandler);
-    };
-  }, []);
-
-  useEffect(() => {
-    intervalRef.current = setInterval(() => {
-      if (!isStarted || stage !== "started") {
-        return;
-      }
-
-      if (time === 0) {
-        setStage("high-score-baseline");
-      }
-
-      if (time !== 0 && textThatWasTyped.length !== textToType.length) {
-        setTime((val) => --val);
-      }
-    }, 1000);
-
-    return () => {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
-      }
-    };
-  }, [isStarted, time, textThatWasTyped, textToType, setStage, setTime]);
 
   const contextValue = useMemo(
     () => ({
