@@ -1,53 +1,34 @@
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import Button from "../UI/Button/Button";
 import RestartWhiteSvg from "../../images/icon-restart-white.svg?react";
 import SeparatedList from "../SeparatedList/SeparatedList";
 import DropdownToButtons from "../UI/DropdownToButtons/DropdownToButtons";
 import TextZone from "../TextZone/TextZone";
 import { useTypingContext } from "../../context/TypingContext";
-import { useDifficultyContext } from "../../context/DifficultyContext";
 import { useStatsContext } from "../../context/StatsContext";
 import { useModeContext } from "../../context/ModeContext";
-import { useStageContext } from "../../context/StageContext";
 import { computeAccuracy, computeWpm } from "../../helpers/stats";
 import { type DropdownOption } from "../UI/DropdownToButtons/DropdownToButtons";
 
 const StageStarted = () => {
-  const intervalRef = useRef<number | undefined>(undefined);
-  const { textThatWasTyped, setTextThatWasTyped } = useTypingContext();
-  const { wpm, setWpm, accuracy, setAccuracy, time, setTime } =
-    useStatsContext();
-  const { textToType, difficultyOptions, onDifficultyOptionClickHandler } =
-    useDifficultyContext();
+  const {
+    textThatWasTyped,
+    setTextThatWasTyped,
+    textToType,
+    difficultyOptions,
+    onDifficultyOptionClickHandler,
+    setIsStarted,
+    setStage,
+    time,
+    setTime,
+  } = useTypingContext();
+  const { wpm, setWpm, accuracy, setAccuracy } = useStatsContext();
   const { modeOptions, onModeOptionClickHandler } = useModeContext();
-  const { isStarted, setIsStarted, setStage } = useStageContext();
-
-  useEffect(() => {
-    intervalRef.current = setInterval(() => {
-      if (!isStarted) {
-        return;
-      }
-
-      if (time === 0) {
-        setStage("high-score-baseline");
-      }
-
-      if (time !== 0 && textThatWasTyped.length !== textToType.length) {
-        setTime((val) => --val);
-      }
-    }, 1000);
-
-    return () => {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
-      }
-    };
-  }, [isStarted, time, textThatWasTyped, textToType, setStage, setTime]);
 
   useEffect(() => {
     if (textThatWasTyped.length >= textToType.length) {
       setStage("high-score-baseline");
-      clearInterval(intervalRef.current ?? undefined);
+      //clearInterval(intervalRef.current ?? undefined);
     }
 
     const { accuracy: computedAccuracy } = computeAccuracy(

@@ -1,12 +1,12 @@
 import SeparatedList from "../SeparatedList/SeparatedList";
 import DropdownToButtons from "../UI/DropdownToButtons/DropdownToButtons";
 import TextZone from "../TextZone/TextZone";
-import { useDifficultyContext } from "../../context/DifficultyContext";
+import { useTypingContext } from "../../context/TypingContext";
 import { useModeContext } from "../../context/ModeContext";
 
 const StageNotStarted = () => {
   const { textToType, difficultyOptions, onDifficultyOptionClickHandler } =
-    useDifficultyContext();
+    useTypingContext();
   const { modeOptions, onModeOptionClickHandler } = useModeContext();
 
   const listOptions = [

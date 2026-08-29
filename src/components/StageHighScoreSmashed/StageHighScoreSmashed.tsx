@@ -7,13 +7,11 @@ import Results from "../Results/Results";
 import Button from "../UI/Button/Button";
 import { useStatsContext } from "../../context/StatsContext";
 import { useTypingContext } from "../../context/TypingContext";
-import { useDifficultyContext } from "../../context/DifficultyContext";
 import { computeAccuracy } from "../../helpers/stats";
 
 const StageHighScoreSmashed = () => {
   const { wpm, accuracy } = useStatsContext();
-  const { textThatWasTyped } = useTypingContext();
-  const { textToType } = useDifficultyContext();
+  const { textThatWasTyped, textToType } = useTypingContext();
   const { correctChars, incorrectChars } = computeAccuracy(
     textThatWasTyped,
     textToType,

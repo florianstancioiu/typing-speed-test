@@ -1,5 +1,5 @@
 import Button from "../UI/Button/Button";
-import { useStageContext } from "../../context/StageContext";
+import { useTypingContext } from "../../context/TypingContext";
 
 export type TextZoneProps = {
   text: string | undefined;
@@ -11,7 +11,7 @@ const TextZone = ({ text, typedText, isStarted }: TextZoneProps) => {
   const characters = text?.split("");
   const typedCharacters = typedText.split("");
   console.log("typedCharacters: ", typedCharacters);
-  const { setStage } = useStageContext();
+  const { setStage } = useTypingContext();
 
   const startTyping = () => {
     setStage("started");
