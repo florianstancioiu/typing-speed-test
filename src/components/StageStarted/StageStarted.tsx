@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import Button from "../UI/Button/Button";
 import RestartWhiteSvg from "../../images/icon-restart-white.svg?react";
 import SeparatedList from "../SeparatedList/SeparatedList";
@@ -11,9 +11,8 @@ import { useModeContext } from "../../store/ModeContext";
 import { useStageContext } from "../../store/StageContext";
 import { computeAccuracy, computeWpm } from "../../helpers/stats";
 
-let globalInterval: number;
-
 const StageStarted = () => {
+  const intervalRef = useRef<number | undefined>(undefined);
   const { textThatWasTyped, setTextThatWasTyped } = useTypingContext();
   const { wpm, setWpm, accuracy, setAccuracy, time, setTime } =
     useStatsContext();
@@ -23,14 +22,13 @@ const StageStarted = () => {
   const { isStarted, setIsStarted, setStage } = useStageContext();
 
   useEffect(() => {
-    const interval = setInterval(() => {
+    intervalRef.current = setInterval(() => {
       if (!isStarted) {
         return;
       }
 
       if (time === 0) {
         setStage("high-score-baseline");
-        clearInterval(interval);
       }
 
       if (time !== 0 && textThatWasTyped.length !== textToType.length) {
@@ -38,17 +36,17 @@ const StageStarted = () => {
       }
     }, 1000);
 
-    globalInterval = interval;
-
     return () => {
-      clearInterval(interval);
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
     };
-  }, [isStarted, time]);
+  }, [isStarted, time, textThatWasTyped, textToType, setStage, setTime]);
 
   useEffect(() => {
-    if (textThatWasTyped.length === textToType.length) {
+    if (textThatWasTyped.length >= textToType.length) {
       setStage("high-score-baseline");
-      clearInterval(globalInterval);
+      clearInterval(intervalRef.current ?? undefined);
     }
 
     const { accuracy: computedAccuracy } = computeAccuracy(
@@ -57,7 +55,7 @@ const StageStarted = () => {
     );
     setAccuracy(computedAccuracy);
     setWpm(computeWpm(textThatWasTyped, 60));
-  }, [textThatWasTyped]);
+  }, [textThatWasTyped, textToType, setStage, setAccuracy, setWpm]);
 
   const listOptions = [
     { id: 1, title: "WPM:", value: wpm },
