@@ -5,9 +5,9 @@ import type { TConductorInstance } from "react-canvas-confetti/dist/types";
 
 import Results from "../Results/Results";
 import Button from "../UI/Button/Button";
-import { useStatsContext } from "../../store/StatsContext";
-import { useTypingContext } from "../../store/TypingContext";
-import { useDifficultyContext } from "../../store/DifficultyContext";
+import { useStatsContext } from "../../context/StatsContext";
+import { useTypingContext } from "../../context/TypingContext";
+import { useDifficultyContext } from "../../context/DifficultyContext";
 import { computeAccuracy } from "../../helpers/stats";
 
 const StageHighScoreSmashed = () => {

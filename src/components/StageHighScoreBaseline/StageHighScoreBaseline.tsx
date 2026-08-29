@@ -6,9 +6,9 @@ import StarPatternTwoSvg from "../../images/pattern-star-2.svg?react";
 import Results from "../Results/Results";
 import Button from "../UI/Button/Button";
 import { computeAccuracy } from "../../helpers/stats";
-import { useStatsContext } from "../../store/StatsContext";
-import { useTypingContext } from "../../store/TypingContext";
-import { useDifficultyContext } from "../../store/DifficultyContext";
+import { useStatsContext } from "../../context/StatsContext";
+import { useTypingContext } from "../../context/TypingContext";
+import { useDifficultyContext } from "../../context/DifficultyContext";
 
 const StageHighScoreBaseline = () => {
   const { wpm, accuracy } = useStatsContext();

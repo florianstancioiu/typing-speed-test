@@ -4,11 +4,11 @@ import RestartWhiteSvg from "../../images/icon-restart-white.svg?react";
 import SeparatedList from "../SeparatedList/SeparatedList";
 import DropdownToButtons from "../UI/DropdownToButtons/DropdownToButtons";
 import TextZone from "../TextZone/TextZone";
-import { useTypingContext } from "../../store/TypingContext";
-import { useDifficultyContext } from "../../store/DifficultyContext";
-import { useStatsContext } from "../../store/StatsContext";
-import { useModeContext } from "../../store/ModeContext";
-import { useStageContext } from "../../store/StageContext";
+import { useTypingContext } from "../../context/TypingContext";
+import { useDifficultyContext } from "../../context/DifficultyContext";
+import { useStatsContext } from "../../context/StatsContext";
+import { useModeContext } from "../../context/ModeContext";
+import { useStageContext } from "../../context/StageContext";
 import { computeAccuracy, computeWpm } from "../../helpers/stats";
 
 const StageStarted = () => {

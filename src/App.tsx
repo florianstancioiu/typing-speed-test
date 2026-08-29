@@ -2,8 +2,8 @@ import type { ChangeEvent } from "react";
 
 import Header from "./components/UI/Header/Header";
 import Stages from "./components/Stages/Stages";
-import { useStageContext } from "./store/StageContext";
-import type { Stage } from "./store/StageContext";
+import { useStageContext } from "./context/StageContext";
+import type { Stage } from "./context/StageContext";
 
 const App = () => {
   const { stage, setStage } = useStageContext();

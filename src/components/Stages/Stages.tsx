@@ -3,7 +3,7 @@ import StageStarted from "../StageStarted/StageStarted";
 import StageHighScoreComplete from "../StageHighScoreComplete/StageHighScoreComplete";
 import StageHighScoreSmashed from "../StageHighScoreSmashed/StageHighScoreSmashed";
 import StageHighScoreBaseline from "../StageHighScoreBaseline/StageHighScoreBaseline";
-import { useStageContext } from "../../store/StageContext";
+import { useStageContext } from "../../context/StageContext";
 
 const Stages = () => {
   const { stage } = useStageContext();

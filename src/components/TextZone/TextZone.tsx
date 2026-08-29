@@ -1,5 +1,5 @@
 import Button from "../UI/Button/Button";
-import { useStageContext } from "../../store/StageContext";
+import { useStageContext } from "../../context/StageContext";
 
 export type TextZoneProps = {
   text: string | undefined;
