@@ -10,6 +10,7 @@ import { useStatsContext } from "../../context/StatsContext";
 import { useModeContext } from "../../context/ModeContext";
 import { useStageContext } from "../../context/StageContext";
 import { computeAccuracy, computeWpm } from "../../helpers/stats";
+import { type DropdownOption } from "../UI/DropdownToButtons/DropdownToButtons";
 
 const StageStarted = () => {
   const intervalRef = useRef<number | undefined>(undefined);
@@ -63,13 +64,23 @@ const StageStarted = () => {
     { id: 3, title: "Time:", value: time + "s" },
   ];
 
+  const onModeBtnClickHandler = (option: DropdownOption) => {
+    restartTest();
+    onModeOptionClickHandler(option);
+  };
+
+  const onDifficultyBtnClickHandler = (option: DropdownOption) => {
+    restartTest();
+    onDifficultyOptionClickHandler(option);
+  };
+
   const restartTest = () => {
     setTextThatWasTyped("");
     setIsStarted(false);
     setTime(60);
     setAccuracy(0);
     setWpm(0);
-    setStage("started");
+    setStage("not-started");
   };
 
   return (
@@ -81,13 +92,13 @@ const StageStarted = () => {
             <DropdownToButtons
               title="Difficulty"
               options={difficultyOptions}
-              onOptionClick={onDifficultyOptionClickHandler}
+              onOptionClick={onDifficultyBtnClickHandler}
               className="md:mr-4 md:pr-4 border-r border-neutral-700"
             />
             <DropdownToButtons
               title="Mode"
               options={modeOptions}
-              onOptionClick={onModeOptionClickHandler}
+              onOptionClick={onModeBtnClickHandler}
             />
           </div>
         </div>
