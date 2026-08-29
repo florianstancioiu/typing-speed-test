@@ -44,17 +44,19 @@ const TextZone = ({ text, typedText, isStarted }: TextZoneProps) => {
         <div className="relative">
           <p className="text-[32px] leading-[136%] tracking-[0.4px] select-none">
             {characters?.map((char, index) => {
+              const charIndex = `${char}-${index}`;
+
               if (index < typedCharacters.length) {
                 if (typedCharacters[index] === char) {
                   return (
-                    <span key={index} className="text-green-500">
+                    <span key={charIndex} className="text-green-500">
                       {char}
                     </span>
                   );
                 } else {
                   return (
                     <span
-                      key={index}
+                      key={charIndex}
                       className="text-red-500 border-b-2 border-red-500"
                     >
                       {char}
@@ -65,13 +67,16 @@ const TextZone = ({ text, typedText, isStarted }: TextZoneProps) => {
 
               if (index === typedCharacters.length) {
                 return (
-                  <span key={index} className="text-neutral-400 bg-neutral-500">
+                  <span
+                    key={charIndex}
+                    className="text-neutral-400 bg-neutral-500"
+                  >
                     {char}
                   </span>
                 );
               }
 
-              return <span key={index}>{char}</span>;
+              return <span key={charIndex}>{char}</span>;
             })}
           </p>
         </div>
