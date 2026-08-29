@@ -1,4 +1,4 @@
-import { useContext, createContext, useState } from "react";
+import { useContext, createContext, useState, useMemo } from "react";
 import { initialStats } from "../reducers/statsReducer";
 
 export type StatsState = {
@@ -30,17 +30,20 @@ export const StatsContextProvider = ({
   const [accuracy, setAccuracy] = useState(initialStats.accuracy);
   const [time, setTime] = useState(60);
 
+  const contextValue = useMemo(
+    () => ({
+      wpm,
+      setWpm,
+      accuracy,
+      setAccuracy,
+      time,
+      setTime,
+    }),
+    [wpm, setWpm, accuracy, setAccuracy, time, setTime],
+  );
+
   return (
-    <StatsContext.Provider
-      value={{
-        wpm,
-        setWpm,
-        accuracy,
-        setAccuracy,
-        time,
-        setTime,
-      }}
-    >
+    <StatsContext.Provider value={contextValue}>
       {children}
     </StatsContext.Provider>
   );

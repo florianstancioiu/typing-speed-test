@@ -1,4 +1,10 @@
-import { useContext, createContext, useState } from "react";
+import {
+  useContext,
+  createContext,
+  useState,
+  useMemo,
+  useCallback,
+} from "react";
 import { type DropdownOption } from "../components/UI/DropdownToButtons/DropdownToButtons";
 import data from "../data.json";
 
@@ -69,29 +75,35 @@ export const DifficultyContextProvider = ({
     }
   };
 
-  const onDifficultyOptionClickHandler = (option: DropdownOption) => {
-    const newOptions = difficultyOptions
-      .map((difficultyOption) => ({
-        ...difficultyOption,
-        isActive: false,
-      }))
-      .map((difficultyOption) => ({
-        ...difficultyOption,
-        isActive: difficultyOption.id === option.id,
-      }));
+  const onDifficultyOptionClickHandler = useCallback(
+    (option: DropdownOption) => {
+      const newOptions = difficultyOptions
+        .map((difficultyOption) => ({
+          ...difficultyOption,
+          isActive: false,
+        }))
+        .map((difficultyOption) => ({
+          ...difficultyOption,
+          isActive: difficultyOption.id === option.id,
+        }));
 
-    setDifficultyOptions(newOptions);
-    setTextToTypeBasedOnDifficulty(newOptions);
-  };
+      setDifficultyOptions(newOptions);
+      setTextToTypeBasedOnDifficulty(newOptions);
+    },
+    [difficultyOptions],
+  );
+
+  const contextValue = useMemo(
+    () => ({
+      textToType,
+      difficultyOptions,
+      onDifficultyOptionClickHandler,
+    }),
+    [textToType, difficultyOptions, onDifficultyOptionClickHandler],
+  );
 
   return (
-    <DifficultyContext.Provider
-      value={{
-        textToType,
-        difficultyOptions,
-        onDifficultyOptionClickHandler,
-      }}
-    >
+    <DifficultyContext.Provider value={contextValue}>
       {children}
     </DifficultyContext.Provider>
   );

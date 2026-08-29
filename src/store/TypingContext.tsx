@@ -1,4 +1,4 @@
-import { useContext, createContext, useState, useEffect } from "react";
+import { useContext, createContext, useState, useEffect, useMemo } from "react";
 
 export type TypingState = {
   keyPosition: number;
@@ -66,14 +66,17 @@ export const TypingContextProvider = ({
     };
   }, []);
 
+  const contextValue = useMemo(
+    () => ({
+      keyPosition,
+      textThatWasTyped,
+      setTextThatWasTyped,
+    }),
+    [keyPosition, textThatWasTyped, setTextThatWasTyped],
+  );
+
   return (
-    <TypingContext.Provider
-      value={{
-        keyPosition,
-        textThatWasTyped,
-        setTextThatWasTyped,
-      }}
-    >
+    <TypingContext.Provider value={contextValue}>
       {children}
     </TypingContext.Provider>
   );

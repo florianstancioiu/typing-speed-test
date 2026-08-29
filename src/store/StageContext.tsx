@@ -1,4 +1,4 @@
-import { useContext, createContext, useState, useEffect } from "react";
+import { useContext, createContext, useState, useEffect, useMemo } from "react";
 
 export type Stage =
   | "not-started"
@@ -43,15 +43,18 @@ export const StageContextProvider = ({
     };
   }, []);
 
+  const contextValue = useMemo(
+    () => ({
+      isStarted,
+      setIsStarted,
+      stage,
+      setStage,
+    }),
+    [isStarted, setIsStarted, stage, setStage],
+  );
+
   return (
-    <StageContext.Provider
-      value={{
-        isStarted,
-        setIsStarted,
-        stage,
-        setStage,
-      }}
-    >
+    <StageContext.Provider value={contextValue}>
       {children}
     </StageContext.Provider>
   );

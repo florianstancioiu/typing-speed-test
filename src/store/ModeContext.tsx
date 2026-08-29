@@ -1,4 +1,10 @@
-import { useContext, createContext, useState } from "react";
+import {
+  useContext,
+  createContext,
+  useState,
+  useMemo,
+  useCallback,
+} from "react";
 import { type DropdownOption } from "../components/UI/DropdownToButtons/DropdownToButtons";
 
 export type ModeState = {
@@ -31,29 +37,33 @@ export const ModeContextProvider = ({ children }: ModeContextProviderProps) => {
     },
   ]);
 
-  const onModeOptionClickHandler = (option: DropdownOption) => {
-    const newOptions = modeOptions
-      .map((modeOption) => ({
-        ...modeOption,
-        isActive: false,
-      }))
-      .map((modeOption) => ({
-        ...modeOption,
-        isActive: modeOption.id === option.id,
-      }));
+  const onModeOptionClickHandler = useCallback(
+    (option: DropdownOption) => {
+      const newOptions = modeOptions
+        .map((modeOption) => ({
+          ...modeOption,
+          isActive: false,
+        }))
+        .map((modeOption) => ({
+          ...modeOption,
+          isActive: modeOption.id === option.id,
+        }));
 
-    setModeOptions(newOptions);
-  };
+      setModeOptions(newOptions);
+    },
+    [modeOptions],
+  );
+
+  const contextValue = useMemo(
+    () => ({
+      modeOptions,
+      onModeOptionClickHandler,
+    }),
+    [modeOptions, onModeOptionClickHandler],
+  );
 
   return (
-    <ModeContext.Provider
-      value={{
-        modeOptions,
-        onModeOptionClickHandler,
-      }}
-    >
-      {children}
-    </ModeContext.Provider>
+    <ModeContext.Provider value={contextValue}>{children}</ModeContext.Provider>
   );
 };
 
