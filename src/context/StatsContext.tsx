@@ -6,8 +6,6 @@ export type StatsState = {
   setWpm: (wpm: number) => void;
   accuracy: number;
   setAccuracy: (accuracy: number) => void;
-  time: number;
-  setTime: React.Dispatch<React.SetStateAction<number>>;
 };
 
 const StatsContext = createContext<StatsState>({
@@ -15,8 +13,6 @@ const StatsContext = createContext<StatsState>({
   setWpm: (_wpm: number) => {},
   accuracy: 0,
   setAccuracy: (_accuracy: number) => {},
-  time: 60,
-  setTime: () => {},
 });
 
 export type StatsContextProviderProps = {
@@ -28,7 +24,6 @@ export const StatsContextProvider = ({
 }: StatsContextProviderProps) => {
   const [wpm, setWpm] = useState(initialStats.wpm);
   const [accuracy, setAccuracy] = useState(initialStats.accuracy);
-  const [time, setTime] = useState(60);
 
   const contextValue = useMemo(
     () => ({
@@ -36,10 +31,8 @@ export const StatsContextProvider = ({
       setWpm,
       accuracy,
       setAccuracy,
-      time,
-      setTime,
     }),
-    [wpm, setWpm, accuracy, setAccuracy, time, setTime],
+    [wpm, setWpm, accuracy, setAccuracy],
   );
 
   return (
