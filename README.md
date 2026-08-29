@@ -14,7 +14,6 @@ This is a solution to the [Typing Speed Test challenge on Frontend Mentor](https
   - [Continued development](#continued-development)
   - [Useful resources](#useful-resources)
 - [Author](#author)
-- [Daily summaries](#daily-summaries)
 
 ## Overview
 
@@ -67,7 +66,6 @@ Users should be able to:
 - Mobile-first workflow
 - [React](https://reactjs.org/) - JS library
 - [TypeScript](https://www.typescriptlang.org/) - JavaScript with types
-- [Storybook](https://storybook.js.org/) - Build, test & document components
 - [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/) - For testing
 - [TailwindCSS](https://tailwindcss.com/) - For styles
 - [Vite](https://vite.dev/) - Build tool
@@ -96,22 +94,3 @@ Use this section to outline areas that you want to continue focusing on in futur
 - Threads - [@florianstancioiu01](https://www.threads.com/@florianstancioiu01)
 - LinkedIn - [florianstancioiu](https://www.linkedin.com/in/florian-stancioiu-765661349/)
 - freeCodeCamp - [florianstancioiu](https://www.freecodecamp.org/florianstancioiu)
-
-## Daily summaries
-
-| Date                | Time Spent | Summary                                                                                                                                                                      |
-| ------------------- | ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| December 19th, 2025 | 3 hours    | I used Vite to create the initial project files, I installed TailwindCSS and vite-plugin-svgr, I created some base components for the "home" page, I enabled github actions. |
-| December 20th, 2025 | 3 hours    | I worked on the "Home - Not started" mobile page                                                                                                                             |
-| December 21st, 2025 | 3 hours    | I worked on the "Home - Not started" tablet page                                                                                                                             |
-| December 22nd, 2025 | 2.5 hours  | I made use of the useContext hook and tried to separate the stages of the app in different components                                                                        |
-| December 22nd, 2025 | 1 hour     | I updated the useTypingContext to include the final stats object                                                                                                             |
-| December 26th, 2025 | 2 hours    | I worked on the StageHighScoreComplete mobile component                                                                                                                      |
-| December 28th, 2025 | 4 hours    | I worked on the desktop version for all page states, I also worked on the hover and focus-visible designs                                                                    |
-| January 4th, 2026   | 2 hours    | I worked on the TypingContext and StageContext                                                                                                                               |
-| January 11th, 2026  | 1.5 hours  | I made a bit of progress on the functionality, you can now start typing and get a visual representation of your accuracy                                                     |
-| January 14th, 2026  | 2 hours    | I tried to implement the countdown timer using setInterval, I didn't manage to do it today but I hope I will complete it tomorrow                                            |
-| April 23rd, 2026    | 1.5 hours  | I split the TypingContext in a bunch of different context files                                                                                                              |
-| April 25th, 2026    | 2 hours    | I made the app functional using the splitted contexts                                                                                                                        |
-
-_Total time spent working on the project:_ **27.5 hours**
