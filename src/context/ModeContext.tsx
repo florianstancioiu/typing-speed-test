@@ -25,12 +25,18 @@ export const ModeContextProvider = ({ children }: ModeContextProviderProps) => {
   const [modeOptions, setModeOptions] = useState([
     {
       id: 1,
-      title: "Timed (60s)",
-      value: "timed-60-seconds",
-      isActive: true,
+      title: "Timed (30s)",
+      value: 30,
+      isActive: false,
     },
     {
       id: 2,
+      title: "Timed (60s)",
+      value: 60,
+      isActive: true,
+    },
+    {
+      id: 3,
       title: "Passage",
       value: "passage",
       isActive: false,
