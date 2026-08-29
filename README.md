@@ -48,7 +48,7 @@ Users should be able to:
 
 ### Screenshot
 
-![](./mobile-screenshot.png)
+![](./screenshots/mobile.png)
 
 ### Links
 
