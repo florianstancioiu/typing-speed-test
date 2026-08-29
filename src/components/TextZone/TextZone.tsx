@@ -11,10 +11,11 @@ const TextZone = ({ text, typedText, isStarted }: TextZoneProps) => {
   const characters = text?.split("");
   const typedCharacters = typedText.split("");
   // console.log("typedCharacters: ", typedCharacters);
-  const { setStage } = useTypingContext();
+  const { setStage, setIsStarted } = useTypingContext();
 
   const startTyping = () => {
     setStage("started");
+    setIsStarted(true);
   };
 
   return (

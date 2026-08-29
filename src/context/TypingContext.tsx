@@ -65,7 +65,7 @@ export const TypingContextProvider = ({
   const [textThatWasTyped, setTextThatWasTyped] = useState("");
   const [time, setTime] = useState(60);
   const intervalRef = useRef<number | undefined>(undefined);
-  const [isStarted, setIsStarted] = useState(true);
+  const [isStarted, setIsStarted] = useState(false);
   const [stage, setStage] = useState<Stage>("not-started");
   const [textToType, setTextToType] = useState<string>(data.medium[0].text);
   const [difficultyOptions, setDifficultyOptions] = useState([
@@ -88,18 +88,6 @@ export const TypingContextProvider = ({
       isActive: false,
     },
   ]);
-
-  useEffect(() => {
-    const keyDownHandler = () => {
-      setIsStarted(true);
-    };
-
-    document.addEventListener("keydown", keyDownHandler);
-
-    return () => {
-      document.removeEventListener("keydown", keyDownHandler);
-    };
-  }, []);
 
   useEffect(() => {
     intervalRef.current = setInterval(() => {
@@ -134,6 +122,12 @@ export const TypingContextProvider = ({
         "NumLock",
       ];
 
+      // don't allow users to register key presses before starting the test
+      if (!isStarted) {
+        return;
+      }
+
+      // don't allow users to register key presses after ending the test
       if (textThatWasTyped.length >= textToType.length) {
         return;
       }
@@ -166,7 +160,7 @@ export const TypingContextProvider = ({
     return () => {
       document.removeEventListener("keydown", keyDownHandler);
     };
-  }, [textThatWasTyped, textToType]);
+  }, [textThatWasTyped, textToType, isStarted]);
 
   const setTextToTypeBasedOnDifficulty = (
     difficultyOptions: DifficultyOption[],

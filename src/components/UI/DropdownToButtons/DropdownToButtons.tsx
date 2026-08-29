@@ -28,7 +28,7 @@ const DropdownToButtons = ({
   let tabletClasses = "hidden md:inline-flex md:items-center";
   tabletClasses = cn(
     tabletClasses,
-    typeof className !== "undefined" ? className : ""
+    typeof className !== "undefined" ? className : "",
   );
 
   const onToggleBtnClickHandler = () => {
@@ -42,7 +42,7 @@ const DropdownToButtons = ({
 
   const onKeyDownHandler = (
     event: KeyboardEvent<HTMLLIElement>,
-    option: DropdownOption
+    option: DropdownOption,
   ) => {
     if (event.key === "Enter") {
       setIsOpen(false);
@@ -60,7 +60,7 @@ const DropdownToButtons = ({
               "text-white py-1.5 px-2.5 border border-neutral-500 rounded-lg text-base cursor-pointer select-none focus-visible:outline-offset-4 focus-visible:outline-blue-400 focus-visible:outline-3";
             const mergedClasses = cn(
               baseClasses,
-              option.isActive ? "border-blue-400 text-blue-400" : ""
+              option.isActive ? "border-blue-400 text-blue-400" : "",
             );
 
             return (

@@ -20,7 +20,9 @@ const SeparatedList = ({ options }: SeparatedListProps) => {
         return (
           <li key={option.id} className={listClasses}>
             <p className="mb-2 md:mb-0 md:mr-2.5 md:text-xl">{option.title}</p>
-            <p className="text-white text-2xl font-bold">{option.value}</p>
+            <p className="text-white text-2xl font-bold min-w-12">
+              {option.value}
+            </p>
           </li>
         );
       })}
