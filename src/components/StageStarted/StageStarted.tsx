@@ -21,23 +21,28 @@ const StageStarted = () => {
     setStage,
     time,
     setTime,
+    gameOver,
   } = useTypingContext();
   const { wpm, setWpm, accuracy, setAccuracy } = useStatsContext();
   const { modeOptions, onModeOptionClickHandler } = useModeContext();
 
   useEffect(() => {
-    if (textThatWasTyped.length >= textToType.length) {
-      setStage("high-score-baseline");
-      //clearInterval(intervalRef.current ?? undefined);
+    if (textThatWasTyped.length >= textToType.length || time <= 0) {
+      gameOver({
+        wpm,
+        accuracy,
+        mode: modeOptions.find((mode) => mode.isActive)?.value ?? 30,
+      });
     }
 
     const { accuracy: computedAccuracy } = computeAccuracy(
       textThatWasTyped,
       textToType,
     );
+
     setAccuracy(computedAccuracy);
     setWpm(computeWpm(textThatWasTyped, 60));
-  }, [textThatWasTyped, textToType, setStage, setAccuracy, setWpm]);
+  }, [textThatWasTyped, textToType, setStage, setAccuracy, setWpm, time]);
 
   const listOptions = [
     { id: 1, title: "WPM:", value: wpm },

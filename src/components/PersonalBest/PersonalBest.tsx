@@ -1,10 +1,9 @@
 import PersonalBestSvg from "../../images/icon-personal-best.svg?react";
 
-export type PersonalBestProps = {
-  wpm: number;
-};
+const PersonalBest = () => {
+  const stats = JSON.parse(localStorage.getItem("personalBest:v1") ?? "{}");
+  const wpm = stats.hasOwnProperty("wpm") ? stats.wpm : 0;
 
-const PersonalBest = ({ wpm }: PersonalBestProps) => {
   return (
     <div className="flex justify-between items-center gap-x-2.5">
       <PersonalBestSvg />

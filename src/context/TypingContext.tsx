@@ -24,6 +24,12 @@ export type Stage =
   | "high-score-smashed"
   | "high-score-baseline";
 
+export type GameOverStats = {
+  wpm: number;
+  accuracy: number;
+  mode: number | string;
+};
+
 export type TypingState = {
   keyPosition: number;
   textThatWasTyped: string;
@@ -37,6 +43,7 @@ export type TypingState = {
   textToType: string;
   difficultyOptions: DropdownOption[];
   onDifficultyOptionClickHandler: (option: DropdownOption) => void;
+  gameOver: (stats: GameOverStats) => void;
 };
 
 const TypingContext = createContext<TypingState>({
@@ -52,6 +59,7 @@ const TypingContext = createContext<TypingState>({
   textToType: "",
   difficultyOptions: [],
   onDifficultyOptionClickHandler: () => {},
+  gameOver: () => {},
 });
 
 export type TypingContextProviderProps = {
@@ -199,6 +207,33 @@ export const TypingContextProvider = ({
     [difficultyOptions],
   );
 
+  const gameOver = (stats: GameOverStats) => {
+    const personalBest = JSON.parse(
+      localStorage.getItem("personalBest:v1") ?? "{}",
+    );
+
+    // there is nothing stored in the localStorage
+    // so display the baseline stage and store the stats in localStorage
+    if (!personalBest.hasOwnProperty("wpm")) {
+      setStage("high-score-baseline");
+      localStorage.setItem("personalBest:v1", JSON.stringify(stats));
+    }
+
+    // there is something in the localStorage
+    if (personalBest.hasOwnProperty("wpm")) {
+      // the wpm in the stats object is smaller or equal than the one in the localStorage
+      if (stats.wpm <= personalBest.wpm) {
+        // so only display the complete stage
+        setStage("high-score-complete");
+      } else {
+        // the wpm in the stats object is bigger than the one in the localStorage
+        // so display the smashed stage and store the stats object in localStorage
+        setStage("high-score-smashed");
+        localStorage.setItem("personalBest:v1", JSON.stringify(stats));
+      }
+    }
+  };
+
   const contextValue = useMemo(
     () => ({
       keyPosition,
@@ -213,6 +248,7 @@ export const TypingContextProvider = ({
       textToType,
       difficultyOptions,
       onDifficultyOptionClickHandler,
+      gameOver,
     }),
     [
       keyPosition,
@@ -227,6 +263,7 @@ export const TypingContextProvider = ({
       textToType,
       difficultyOptions,
       onDifficultyOptionClickHandler,
+      gameOver,
     ],
   );
 

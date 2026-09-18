@@ -11,7 +11,7 @@ const Header = () => {
           <p className="text-xs">Type as fast as you can in 60 seconds</p>
         </div>
       </div>
-      <PersonalBest wpm={92} />
+      <PersonalBest />
     </header>
   );
 };
