@@ -16,5 +16,6 @@
 | April 25th, 2026     | 2 hours    | I made the app functional using the splitted contexts                                                                                                                        |
 | August 29th, 2026    | 4 hours    | I made the app functional using fewer context files                                                                                                                          |
 | September 18th, 2026 | 2 hours    | I added the gameOver function                                                                                                                                                |
+| September 23rd, 2026 | 1 hour     | I created a isGameOverStats typeguard function                                                                                                                               |
 
-_Total time spent working on the project:_ **31.5 hours**
+_Total time spent working on the project:_ **34.5 hours**
