@@ -20,3 +20,16 @@ export const computeAccuracy = (textTyped: string, text: string) => {
     incorrectChars: textTyped.length - correctChars,
   };
 };
+
+export const isGameOverStats = (value: unknown) => {
+  return (
+    typeof value === "object" &&
+    value !== null &&
+    "wpm" in value &&
+    typeof value.wpm === "number" &&
+    "accuracy" in value &&
+    typeof value.accuracy === "number" &&
+    "mode" in value &&
+    (typeof value.mode === "number" || typeof value.mode === "string")
+  );
+};

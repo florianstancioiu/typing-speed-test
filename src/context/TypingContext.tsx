@@ -9,6 +9,7 @@ import {
 } from "react";
 import { type DropdownOption } from "../components/UI/DropdownToButtons/DropdownToButtons";
 import data from "../data.json";
+import { isGameOverStats } from "../helpers/stats";
 
 export type DifficultyOption = {
   id: number;
@@ -208,19 +209,17 @@ export const TypingContextProvider = ({
   );
 
   const gameOver = (stats: GameOverStats) => {
-    const personalBest = JSON.parse(
-      localStorage.getItem("personalBest:v1") ?? "{}",
-    );
+    const localPersonalBest = localStorage.getItem("personalBest:v1");
+    const personalBest = localPersonalBest
+      ? (JSON.parse(localPersonalBest) as GameOverStats)
+      : null;
 
     // there is nothing stored in the localStorage
     // so display the baseline stage and store the stats in localStorage
-    if (!personalBest.hasOwnProperty("wpm")) {
+    if (!isGameOverStats(personalBest)) {
       setStage("high-score-baseline");
       localStorage.setItem("personalBest:v1", JSON.stringify(stats));
-    }
-
-    // there is something in the localStorage
-    if (personalBest.hasOwnProperty("wpm")) {
+    } else if (personalBest !== null) {
       // the wpm in the stats object is smaller or equal than the one in the localStorage
       if (stats.wpm <= personalBest.wpm) {
         // so only display the complete stage
