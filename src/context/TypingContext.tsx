@@ -75,19 +75,19 @@ export const TypingContextProvider = ({
   const intervalRef = useRef<number | undefined>(undefined);
   const [isStarted, setIsStarted] = useState(false);
   const [stage, setStage] = useState<Stage>("not-started");
-  const [textToType, setTextToType] = useState<string>(data.medium[0].text);
+  const [textToType, setTextToType] = useState<string>(data.easy[0].text);
   const [difficultyOptions, setDifficultyOptions] = useState([
     {
       id: 1,
       title: "Easy",
       value: "easy",
-      isActive: false,
+      isActive: true,
     },
     {
       id: 2,
       title: "Medium",
       value: "medium",
-      isActive: true,
+      isActive: false,
     },
     {
       id: 3,
