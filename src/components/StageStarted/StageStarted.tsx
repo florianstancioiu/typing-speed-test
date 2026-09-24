@@ -26,6 +26,11 @@ const StageStarted = () => {
   const { wpm, setWpm, accuracy, setAccuracy } = useStatsContext();
   const { modeOptions, onModeOptionClickHandler } = useModeContext();
 
+  const currentDifficulty = difficultyOptions.filter(
+    (option) => option.isActive,
+  )[0];
+  const currentDifficultyTime = currentDifficulty.value;
+
   useEffect(() => {
     if (textThatWasTyped.length >= textToType.length || time <= 0) {
       gameOver({
@@ -41,8 +46,31 @@ const StageStarted = () => {
     );
 
     setAccuracy(computedAccuracy);
-    setWpm(computeWpm(textThatWasTyped, 60));
-  }, [textThatWasTyped, textToType, setStage, setAccuracy, setWpm, time]);
+
+    if (typeof currentDifficultyTime === "number") {
+      setWpm(
+        computeWpm(
+          textThatWasTyped,
+          currentDifficultyTime - time,
+          currentDifficultyTime,
+        ),
+      );
+    } else {
+      setWpm(computeWpm(textThatWasTyped, time, time));
+    }
+  }, [
+    textThatWasTyped,
+    textToType,
+    setStage,
+    setAccuracy,
+    setWpm,
+    time,
+    modeOptions,
+    gameOver,
+    wpm,
+    accuracy,
+    currentDifficultyTime,
+  ]);
 
   const listOptions = [
     { id: 1, title: "WPM:", value: wpm },
