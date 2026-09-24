@@ -208,7 +208,7 @@ export const TypingContextProvider = ({
     [difficultyOptions],
   );
 
-  const gameOver = (stats: GameOverStats) => {
+  const gameOver = useCallback((stats: GameOverStats) => {
     const localPersonalBest = localStorage.getItem("personalBest:v1");
     const personalBest = localPersonalBest
       ? (JSON.parse(localPersonalBest) as GameOverStats)
@@ -231,7 +231,7 @@ export const TypingContextProvider = ({
         localStorage.setItem("personalBest:v1", JSON.stringify(stats));
       }
     }
-  };
+  }, []);
 
   const contextValue = useMemo(
     () => ({
