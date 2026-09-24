@@ -1,5 +1,9 @@
-export const computeWpm = (text: string, time: number) => {
-  return Math.round((text.length / 5) * (60 / time));
+export const computeWpm = (
+  text: string,
+  time: number,
+  currentDifficultyTime: number,
+) => {
+  return Math.round((text.length / 5) * (currentDifficultyTime / time));
 };
 
 export const computeAccuracy = (textTyped: string, text: string) => {
